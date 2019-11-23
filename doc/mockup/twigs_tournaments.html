@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+
+    <style>
+            /* Set the size of the div element that contains the map */
+           #map {
+             height: 400px;  /* The height is 400 pixels */
+             width: 100%;  /* The width is the width of the web page */
+            }
+         </style>
+
+
+</head>
+
+<body>
+    <!-- nav bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">IIS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                        <a class="nav-link" href="#">Turnaje</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="#">Týmy</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="#">Hráči</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <a class="nav-link" href="#"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+            <a class="nav-link" href="#"><i class="fas fa-user-plus"></i> Register</a>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+
+        <!-- Turnaje strana -->
+        <div class="container">
+            <h2>Turnaje</h2>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th><a href="#">Turnaj</a></th>
+                        <th>Datum</th>
+                        <th>Místo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th><a href="#">Turnaj</a></th>
+                        <th>Datum</th>
+                        <th>Místo</th>
+                    </tr>
+                    </tr>
+                    <tr>
+                        <th><a href="#">Turnaj</a></th>
+                        <th>Datum</th>
+                        <th>Místo</th>
+                    </tr>
+                    <tr>
+                        <th><a href="#">Turnaj</a></th>
+                        <th>Datum</th>
+                        <th>Místo </th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Turnaj popis -->
+        <div class="container">
+            <h2>Slivovica cup</h2>
+            Zveme vás na 69 ročník dnes již tradičního amatérského basketbalového turnaje Slivovica cup který se uskuteční 20. 4. 2020 v obci
+            Ruda u Velkého Meziříčí. Startovné je 200 Kč a zahrnuje guláš a tak dále. Lorem ipsum dolor sit amet consectetur adipisicing elit. At pariatur repellendus necessitatibus asperiores dolor? Officia accusantium iusto cupiditate doloremque ducimus illo fuga ut quo omnis, repudiandae impedit at, sint corporis!
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem eaque aperiam voluptates voluptas libero culpa, omnis perferendis laudantium fuga quae, numquam aliquam cum autem? Rem eaque atque dicta ipsa nesciunt?
+            <br >
+            <br >
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th><b> Datum </b></th>
+                        <th>20. 4. 2020 - 25. 4. 2020</th>
+                        <th><b> Místo </b></th>
+                        <th>Ruda</th>
+                    </tr>
+                
+                    <tr>
+                            <th><b> Typ </b></th>
+                            <th>3v3</th>
+                            <th><b> Volné místo (týmy) </b></th>
+                            <th>2/10</th>
+                        </tr>
+                    </tr>
+                    <tr>
+                        <th>Přihlásit tým</th>
+                        <th></th>
+                        <th></th>
+                        <th><button class="btn btn-success my-2 my-sm-0" type="submit">Přihlásit</button></th>                        
+                    </tr>
+                    <tr>
+                            <th>Přihlásit se jako rozhodčí</th>
+                            <th></th>
+                            <th></th>
+                            <th><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Přihlásit</button></th>
+                    </tr>
+                </tbody>
+            </table>
+
+
+                    <!-- Zapasy turnaje -->
+        <div class="container">
+                <h3>Nejblizsi zapasy turnaje</h3>
+                <br>
+                <table class="table table-hover">                  
+                    <tbody>
+                            
+                            <tr class='clickable-row' onclick=window.location="#">
+                                        <th>21.4.2020</th>
+                                        <th>TJ Sokol Podčerady - Slavoj Nová Ves</th>
+                                        <th>16:30</th>
+                            </tr>
+                        </tr>
+
+                        <tr class='clickable-row' onclick=window.location="#">
+                            <th>21.4.2020</th>
+                            <th>SK Dolní Heřmanice - TJ Družstevník Jabloňov</th>
+                            <th>15:00</th>
+                        </tr>
+                        </tr>
+                        <tr class='clickable-row' onclick=window.location="#">
+                            <th>22.4.2020</th>
+                            <th>BK Velká Bíteš - TJ Křoví</th>
+                            <th>14:45</th>
+                        </tr>
+                        <tr class='clickable-row' onclick=window.location="#">
+                            <th>24.4.2020</th>
+                            <th>SK Ořechov - SK Křižanov</th>
+                            <th> 14:50 </th>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="container">
+                    <h3>Uplynule zapasy turnaje</h3>
+                    <br>
+                    <table class="table table-hover">                  
+                        <tbody>
+                                
+                                <tr class='clickable-row' onclick=window.location="#">
+                                            <th>21.4.2020</th>
+                                            <th>TJ Sokol Podčerady - Slavoj Nová Ves</th>
+                                            <th>69:30</th>
+                                </tr>
+                            </tr>
+    
+                            <tr class='clickable-row' onclick=window.location="#">
+                                <th>21.4.2020</th>
+                                <th>SK Dolní Heřmanice - TJ Družstevník Jabloňov</th>
+                                <th>115:100</th>
+                            </tr>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            
+
+
+            <!-- mapa -->
+            <br >
+            <br >
+            <div id="map"></div>
+          
+          
+          
+          <!-- javascript for the map -->          
+          <script>
+                    // Initialize and add the map
+                    function initMap() {
+                      // The location of Uluru
+                      var uluru = {lat: 49.3225, lng: 16.1259};
+                      // The map, centered at Uluru
+                      var map = new google.maps.Map(
+                          document.getElementById('map'), {zoom: 18, center: uluru});
+                      // The marker, positioned at Uluru
+                      var marker = new google.maps.Marker({position: uluru, map: map});
+                    }
+                        </script>
+                        <!--Load the API from the specified URL
+                        * The async attribute allows the browser to render the page while the API loads
+                        * The key parameter will contain your own API key (which is not needed for this tutorial)
+                        * The callback parameter executes the initMap() function
+                        -->
+                        <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVTPVblFcoS6coEYVd5IYxcrgtddfPsao&callback=initMap">
+                        </script>
+
+                        
+
+
+
+
+
+        </div>
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>
