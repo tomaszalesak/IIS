@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -49,6 +51,16 @@ class Uzivatel implements UserInterface
      * @ORM\Column(type="date")
      */
     private $datum_narozeni;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Tym", mappedBy="uzivatele")
+     */
+    private $tymy;
+
+    public function __construct()
+    {
+        $this->tymy = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -155,6 +167,34 @@ class Uzivatel implements UserInterface
     public function setDatumNarozeni(\DateTimeInterface $datum_narozeni): self
     {
         $this->datum_narozeni = $datum_narozeni;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tym[]
+     */
+    public function getTymy(): Collection
+    {
+        return $this->tymy;
+    }
+
+    public function addTymy(Tym $tymy): self
+    {
+        if (!$this->tymy->contains($tymy)) {
+            $this->tymy[] = $tymy;
+            $tymy->addUzivatele($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTymy(Tym $tymy): self
+    {
+        if ($this->tymy->contains($tymy)) {
+            $this->tymy->removeElement($tymy);
+            $tymy->removeUzivatele($this);
+        }
 
         return $this;
     }

@@ -1,0 +1,19 @@
+{% extends 'user/base_user.html.twig' %}
+
+{% block row %}
+
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <h1>Založ tým</h1>
+
+            {{ form_start(tymForm) }}
+
+            {{ form_row(tymForm.jmeno ) }}
+            {{ form_row(tymForm.typ) }}
+                <button class="btn btn-primary">Založit tým </button>
+
+            {{ form_end(tymForm) }}
+        </div>
+    </div>
+
+{% endblock %}
