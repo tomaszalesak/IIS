@@ -9,8 +9,7 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-dark  bg-dark">
                 <a class="navbar-brand" href="{{ path('app_main') }}">IIS</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +22,7 @@
                             <a class="nav-link" href="#">Turnaje</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Týmy</a>
+                            <a class="nav-link" href="{{ path('app_tymy') }}">Týmy</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Hráči</a>
@@ -41,10 +40,7 @@
                     {% endif %}
                 </div>
             </nav>
-            <div class="container-fluid">
-                {% block container %}{% endblock %}
-            </div>
-        {% endblock %}
+                {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

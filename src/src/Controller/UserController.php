@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Tym;
+use App\Entity\Uzivatel;
 use App\Form\RegistrationFormType;
 use App\Form\TymFormType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -29,7 +30,16 @@ class UserController extends AbstractController
      */
     public function tymy()
     {
+        /*** @var Uzivatel */
+        $uzivatel = $this->getUser();
+
+
+
+
+
+
         return $this->render('user/tymy.html.twig', [
+            'tymy' => $uzivatel->getTymy()
         ]);
     }
 
