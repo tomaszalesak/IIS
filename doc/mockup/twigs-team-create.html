@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+
+    <style>
+            /* Set the size of the div element that contains the map */
+           #map {
+             height: 400px;  /* The height is 400 pixels */
+             width: 100%;  /* The width is the width of the web page */
+            }
+         </style>
+
+
+</head>
+
+<body>
+    <!-- nav bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">IIS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                        <a class="nav-link" href="#">Turnaje</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="#">Týmy</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" href="#">Hráči</a>
+                </li>
+
+                 <!-- User -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Username
+                    </a>
+                    <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Moje turnaje</a>
+                    <a class="dropdown-item" href="#">Založit turnaj</a>
+                    <a class="dropdown-item" href="#">Moje týmy</a>
+                    <a class="dropdown-item" href="#">Založit tým</a>
+                    <a class="dropdown-item" href="#">Moje statistiky</a>
+                    <a class="dropdown-item" href="#">Přihlásit se jako rozhodčí</a>
+
+
+                    </div>
+             </li>
+            </ul>
+
+            
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <a class="nav-link" href="#"><i class="fas fa-sign-in-alt"></i> Sign In</a>
+            <a class="nav-link" href="#"><i class="fas fa-user-plus"></i> Register</a>
+        </div>
+    </nav>
+
+
+
+
+    <div class="container-fluid">
+        <h2>Založení nového týmu</h2>
+        <br>
+
+        <form>
+                <div class="form-group">
+                  <label for="exampleEnterName">Jmeno týmu <b>*</b> </label>
+                  <input type="text" class="form-control" id="exampleInputEmail1">
+                </div>
+
+                <!-- TODO: přidat do DB -->
+                <div class="form-group">
+                        <label for="exampleFormControlTextarea1">Popis týmu</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Typ týmu</label> 
+                    <select class="form-control">
+                        <option>1v1</option>
+                        <option>3v3</option>
+                        <option>5v5</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                        <label for="exampleFormControlTextarea1">maximální počet členů týmu</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="2">Sem jebnout nějakej spinner aby šlo zadat min. počet členů 1 3 nebo 5 
+(podle toho co je to ya typ tý,u a omezit to na nějakej rozumnej počet) </textarea>
+                </div>
+                
+                
+                
+                <!-- možné featury:adresa týmu - v tom jednom examplu to bzlo -->                
+
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+      
+
+    </div>
+    
+
+</body>
+
+</html>
