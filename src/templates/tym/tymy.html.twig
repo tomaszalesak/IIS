@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        {%  if tymy|length == 0  %}
+        <h4>Zatím žádném týmy</h4>
+        {% else %}
+        <h4>Seznam týmů</h4>
+        {{ include('tym/_tymy.html.twig') }}
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

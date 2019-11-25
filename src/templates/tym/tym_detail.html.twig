@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+    {% if is_granted('ROLE_USER') and tym.vedouci == app.user %}
+        <div class="d-flex justify-content-between">
+            <div>
+                <h2>{{ tym.jmeno }}</h2>
+            </div>
+            <div>
+                <a class="btn btn-secondary" href="{{ path('app_user_zmena_tym', {nazev: tym.jmeno}) }}" role="submit"> <i class="fas fa-edit"></i>  Upravit</a>
+                <button class="btn btn-danger my-2 my-sm-0" type="button" data-toggle="modal" data-target="#exampleModal"> <i class="fas fa-trash-alt"></i>  Odstranit</button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Odstranění</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Určitě chcete tento tým odstranit?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                                <a class="btn btn-danger" role="submit" href="{{ path('app_user_odstranit_tym', {id: tym.id}) }}" >Odstranit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <h2>{{ tym.jmeno }}</h2>
+    {% endif %}
+        <div class = "row">
+        <br >
+
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                <th><b> Adresa </b></th>
+
+                <th>{{ tym.adresa }}</th>
+            </tr>
+            <tr>
+                <th><b> Typ týmu </b></th>
+                <th>{{ tym.typ.nazev }}</th>
+            </tr>
+            <tr>
+                <th><b> Volné místo (hráčů) </b></th>
+                <th>{{ tym.typ.pocetclenutymu - tym.uzivatele|length }} / {{tym.typ.pocetclenutymu}}</th>
+            </tr>
+            {% if is_granted('ROLE_USER') %}
+                {% if app.user not in tym.uzivatele %}
+                    <tr>
+                        <th>Přihlásit se do týmu</th>
+
+                        <th><a class="btn btn-success" role="submit" href="{{ path('app_user_prihlasit_tym', {id: tym.id}) }}" >Přihlásit</a></th>
+                    </tr>
+                {% endif %}
+            {% endif %}
+            </tbody>
+        </table>
+
+        <h3> Členové týmu</h3>
+        <br >
+        <table class="table table-striped">
+            <tbody>
+            <tr>
+                {% for uzivatel in tym.uzivatele %}
+                    <th> <a href=""> {{ uzivatel.jmeno }} {{ uzivatel.prijmeni }} </a></th>
+                {% endfor %}
+            </tr>
+            </tbody>
+        </table>
+
+        {{ tym.popis }}
+
+    </div>
+
+{% endblock %}

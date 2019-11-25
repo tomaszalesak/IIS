@@ -57,9 +57,15 @@ class Uzivatel implements UserInterface
      */
     private $tymy;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Tym", mappedBy="vedouci")
+     */
+    private $vedouci_tymu;
+
     public function __construct()
     {
         $this->tymy = new ArrayCollection();
+        $this->vedouci_tymu = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -194,6 +200,37 @@ class Uzivatel implements UserInterface
         if ($this->tymy->contains($tymy)) {
             $this->tymy->removeElement($tymy);
             $tymy->removeUzivatele($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Tym[]
+     */
+    public function getVedouciTymu(): Collection
+    {
+        return $this->vedouci_tymu;
+    }
+
+    public function addVedouciTymu(Tym $vedouciTymu): self
+    {
+        if (!$this->vedouci_tymu->contains($vedouciTymu)) {
+            $this->vedouci_tymu[] = $vedouciTymu;
+            $vedouciTymu->setVedouci($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVedouciTymu(Tym $vedouciTymu): self
+    {
+        if ($this->vedouci_tymu->contains($vedouciTymu)) {
+            $this->vedouci_tymu->removeElement($vedouciTymu);
+            // set the owning side to null (unless already changed)
+            if ($vedouciTymu->getVedouci() === $this) {
+                $vedouciTymu->setVedouci(null);
+            }
         }
 
         return $this;

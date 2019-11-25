@@ -5,9 +5,12 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TymRepository")
+ * @UniqueEntity(fields={"jmeno"}, message="Tým se stejným názvem už existuje")
  */
 class Tym
 {
@@ -20,12 +23,14 @@ class Tym
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Vyplňte prosím toto pole")
      */
     private $jmeno;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Typ", inversedBy="tymy")
      * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Vyplňte prosím toto pole")
      */
     private $typ;
 
@@ -33,6 +38,21 @@ class Tym
      * @ORM\ManyToMany(targetEntity="App\Entity\Uzivatel", inversedBy="tymy")
      */
     private $uzivatele;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Uzivatel", inversedBy="vedouci_tymu")
+     */
+    private $vedouci;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $popis;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $adresa;
 
     public function __construct()
     {
@@ -90,6 +110,42 @@ class Tym
         if ($this->uzivatele->contains($uzivatele)) {
             $this->uzivatele->removeElement($uzivatele);
         }
+
+        return $this;
+    }
+
+    public function getVedouci(): ?Uzivatel
+    {
+        return $this->vedouci;
+    }
+
+    public function setVedouci(?Uzivatel $vedouci): self
+    {
+        $this->vedouci = $vedouci;
+
+        return $this;
+    }
+
+    public function getPopis(): ?string
+    {
+        return $this->popis;
+    }
+
+    public function setPopis(?string $popis): self
+    {
+        $this->popis = $popis;
+
+        return $this;
+    }
+
+    public function getAdresa(): ?string
+    {
+        return $this->adresa;
+    }
+
+    public function setAdresa(?string $adresa): self
+    {
+        $this->adresa = $adresa;
 
         return $this;
     }

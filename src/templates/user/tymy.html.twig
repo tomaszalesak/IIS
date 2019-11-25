@@ -1,32 +1,18 @@
-{% extends 'user/base_user.html.twig' %}
+{% extends 'base.html.twig' %}
 
-{% block container %}
+{% block body %}
+<div class="container">
     <div class="row">
         <a class="btn btn-success" href="{{ path('app_user_novy_tym') }}" role="button"><i class="fas fa-plus"></i> Nový tým</a>
     </div>
-
     <div class="row">
+        {%  if tymy|length == 0  %}
+        <h4>Zatím nejsi v žádném týmu</h4>
+        {% else %}
         <h4>Seznam tvých týmů</h4>
-
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Typ</th>
-                </tr>
-            </thead>
-            <tbody>
-            {%  set i = 0 %}
-            {% for tym in tymy %}
-                {% set i = i + 1 %}
-                <tr>
-                    <th scope="row">{{ i }}</th>
-                    <td>{{ tym.jmeno }}</td>
-                    <td>{{ tym.typ.nazev }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+            {{ include('tym/_tymy.html.twig') }}
+        {% endif %}
     </div>
+</div>
+
 {% endblock %}
