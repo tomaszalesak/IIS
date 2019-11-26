@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {%  if turnaje|length == 0  %}
+                <h4>Zatím žádném turnaje</h4>
+            {% else %}
+                <h4>Seznam turnajů</h4>
+                {{ include('turnaj/_turnaje.html.twig') }}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

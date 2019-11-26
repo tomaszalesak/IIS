@@ -67,8 +67,8 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/zmena_tymu/{nazev}", name="app_user_zmena_tym")
-     */
+ * @Route("/user/zmena_tymu/{nazev}", name="app_user_zmena_tym")
+ */
     public function zmenaTym($nazev, Request $request, EntityManagerInterface $em)
     {
         $tym = $em->getRepository(Tym::class)->findOneBy(['jmeno' => $nazev]);

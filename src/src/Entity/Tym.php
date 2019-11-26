@@ -54,9 +54,15 @@ class Tym
      */
     private $adresa;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Turnaj", mappedBy="tymy")
+     */
+    private $turnaje;
+
     public function __construct()
     {
         $this->uzivatele = new ArrayCollection();
+        $this->turnaje = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -146,6 +152,34 @@ class Tym
     public function setAdresa(?string $adresa): self
     {
         $this->adresa = $adresa;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Turnaj[]
+     */
+    public function getTurnaje(): Collection
+    {
+        return $this->turnaje;
+    }
+
+    public function addTurnaje(Turnaj $turnaje): self
+    {
+        if (!$this->turnaje->contains($turnaje)) {
+            $this->turnaje[] = $turnaje;
+            $turnaje->addTymy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTurnaje(Turnaj $turnaje): self
+    {
+        if ($this->turnaje->contains($turnaje)) {
+            $this->turnaje->removeElement($turnaje);
+            $turnaje->removeTymy($this);
+        }
 
         return $this;
     }

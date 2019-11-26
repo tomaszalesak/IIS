@@ -62,6 +62,11 @@ class Uzivatel implements UserInterface
      */
     private $vedouci_tymu;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Turnaj", mappedBy="vedouci")
+     */
+    private $vedouci_turnaje;
+
     public function __construct()
     {
         $this->tymy = new ArrayCollection();
@@ -230,6 +235,37 @@ class Uzivatel implements UserInterface
             // set the owning side to null (unless already changed)
             if ($vedouciTymu->getVedouci() === $this) {
                 $vedouciTymu->setVedouci(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Turnaj[]
+     */
+    public function getVedouciTurnaje(): Collection
+    {
+        return $this->vedouci_turnaje;
+    }
+
+    public function addVedouciTurnaje(Turnaj $vedouciTurnaje): self
+    {
+        if (!$this->vedouci_turnaje->contains($vedouciTurnaje)) {
+            $this->vedouci_turnaje[] = $vedouciTurnaje;
+            $vedouciTurnaje->setVedouci($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVedouciTurnaje(Turnaj $vedouciTurnaje): self
+    {
+        if ($this->vedouci_turnaje->contains($vedouciTurnaje)) {
+            $this->vedouci_turnaje->removeElement($vedouciTurnaje);
+            // set the owning side to null (unless already changed)
+            if ($vedouciTurnaje->getVedouci() === $this) {
+                $vedouciTurnaje->setVedouci(null);
             }
         }
 

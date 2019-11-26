@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <a class="btn btn-success" href="{{ path('app_user_novy_turnaj') }}" role="button"><i class="fas fa-plus"></i> Nový turnaj</a>
+        </div>
+        <div class="row">
+            {%  if turnaje|length == 0  %}
+                <h4>Zatím žádný z tvých týmů není přihlášen na turnaj</h4>
+            {% else %}
+                <h4>Seznam tvých turnaju</h4>
+                {{ include('turnaj/_turnaje.html.twig') }}
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

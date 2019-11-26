@@ -33,9 +33,15 @@ class Typ
      */
     private $tymy;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Turnaj", mappedBy="typ")
+     */
+    private $turnaje;
+
     public function __construct()
     {
         $this->tymy = new ArrayCollection();
+        $this->turnaje = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -92,6 +98,37 @@ class Typ
             // set the owning side to null (unless already changed)
             if ($tymy->getTyp() === $this) {
                 $tymy->setTyp(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Turnaj[]
+     */
+    public function getTurnaje(): Collection
+    {
+        return $this->turnaje;
+    }
+
+    public function addTurnaje(Turnaj $turnaje): self
+    {
+        if (!$this->turnaje->contains($turnaje)) {
+            $this->turnaje[] = $turnaje;
+            $turnaje->setTyp($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTurnaje(Turnaj $turnaje): self
+    {
+        if ($this->turnaje->contains($turnaje)) {
+            $this->turnaje->removeElement($turnaje);
+            // set the owning side to null (unless already changed)
+            if ($turnaje->getTyp() === $this) {
+                $turnaje->setTyp(null);
             }
         }
 
