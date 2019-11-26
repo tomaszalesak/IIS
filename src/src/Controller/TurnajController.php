@@ -28,7 +28,7 @@ class TurnajController extends AbstractController
     }
 
     /**
-     * @Route("/user/tymy", name="app_user_turnaje")
+     * @Route("/user/turnaje", name="app_user_turnaje")
      */
     public function user_turnaje()
     {
@@ -130,7 +130,7 @@ class TurnajController extends AbstractController
         $tym = $em->getRepository(Tym::class)->find($tym_id);
 
         if(($turnaj->getTyp() == $tym->getTyp()) and $this->getUser() == $tym->getVedouci()){
-            $turnaj->addTym($tym);
+            $turnaj->addTymy($tym);
             $em->flush();
             $this->addFlash('success', 'Tým byl přidán');
         }else

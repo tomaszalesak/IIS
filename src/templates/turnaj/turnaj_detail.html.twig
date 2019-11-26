@@ -2,6 +2,7 @@
 
 {% block body %}
     <div class="container">
+    <div class = "row">
     {% if is_granted('ROLE_USER') and turnaj.vedouci == app.user %}
         <div class="d-flex justify-content-between">
             <div>
@@ -35,7 +36,7 @@
     {% else %}
         <h2>{{ turnaj.nazev }}</h2>
     {% endif %}
-    <div class = "row">
+
         <br >
 
         <table class="table table-striped">
@@ -65,22 +66,17 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Odstranění</h5>
+                                    <h4 class="modal-title" id="exampleModalLabel">Jaký z týmů chceš přihlásit?</h4>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    Jaký z týmů chceš přihlásit?
-                                    <table class="table table-striped">
-                                        <tbody>
                                         {% for tym in app.user.tymy %}
-                                            {% if tym.typ == turnaj.typ and tym.vedouci == app.user %}
-                                                <tr> <a class="btn btn-success" role="submit" href="{{ path('app_user_prihlasit_tym_turnaj', {turnaj_id: turnaj.id, tym_id: tym.id }) }}">{{ tym.jmeno }}</a> </tr>
+                                            {% if tym.typ == turnaj.typ and tym.vedouci == app.user and  tym not in turnaj.tymy  %}
+                                                <a  href="{{ path('app_user_prihlasit_tym_turnaj', {turnaj_id: turnaj.id, tym_id: tym.id }) }}">{{ tym.jmeno }}</a>
                                             {% endif %}
                                         {% endfor %}
-                                        </tbody>
-                                    </table>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
@@ -100,12 +96,19 @@
             {% endif %}
             </tbody>
         </table>
+    </div>
 
-        {{ turnaj.popis }}
-        <br >
+        <div class="row">
+            <h3> Popis</h3>
+        </div>
+        <div class="row">
+            {{ turnaj.popis }}
+        </div>
 
+    <div class="row">
         <h3> Týmy zapsané na turnaj</h3>
-        <br >
+    </div>
+    <div class="row">
         <table class="table table-striped">
             <tbody>
             <tr>
@@ -115,8 +118,9 @@
             </tr>
             </tbody>
         </table>
+    </div>
 
-
+    </div>
 
     </div>
 

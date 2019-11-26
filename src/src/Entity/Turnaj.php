@@ -47,7 +47,7 @@ class Turnaj
     /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="Vyplňte prosím toto pole")
-     * @Assert\GreaterThan(propertyPath="minimum_tymu",message="Toto pole musí být větší než Minimální počet týmů")
+     * @Assert\GreaterThanOrEqual(propertyPath="minimum_tymu",message="Toto pole musí být větší než Minimální počet týmů")
      */
     private $maximum_tymu;
 
