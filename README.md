@@ -201,7 +201,7 @@ rw-r--r--  1 xtest99  vti-fekt  0 21 oct 16:17 index.php
 .htaccess
  ```
 DefaultCharset utf-8
-AddHandler application/x-httpd-php73 .php
+AddHandler application/x-httpd-php72 .php
  ```
 
  .env
@@ -214,4 +214,6 @@ AddHandler application/x-httpd-php73 .php
 php bin/Console server:run
 php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
+php bin/console doctrine:schema:update --force
+chmod -R 755 ~/WWW/.*
 ```
