@@ -58,9 +58,9 @@
                     <tr>
                         <th>Přihlásit se do týmu</th>
                     {% if tym.typ.pocetclenutymu == tym.uzivatele|length %}
-                        <th><a class="btn btn-success" role="submit" href="{{ path('app_user_prihlasit_tym', {id: tym.id}) }} " aria-disabled="true">Přihlásit</a></th>
+                        <th><a class="btn btn-success disabled" role="submit" href="{{ path('app_user_prihlasit_tym', {id: tym.id}) }} " aria-disabled="true">Přihlásit</a></th>
                     {% else %}
-                        <th><a class="btn btn-success" role="submit" href="{{ path('app_user_prihlasit_tym', {id: tym.id}) }}" >Přihlásit</a></th>
+                        <th><a class="btn btn-success" role="submit" href="{{ path('app_user_prihlasit_tym', {id: tym.id}) }}">Přihlásit</a></th>
                     {% endif %}
                     </tr>
                 {% endif %}

@@ -42,14 +42,8 @@ class Turnaj
      * @ORM\Column(type="integer")
      * @Assert\NotBlank(message="Vyplňte prosím toto pole")
      */
-    private $minimum_tymu;
+    private $pocet_tymu;
 
-    /**
-     * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message="Vyplňte prosím toto pole")
-     * @Assert\GreaterThanOrEqual(propertyPath="minimum_tymu",message="Toto pole musí být větší než Minimální počet týmů")
-     */
-    private $maximum_tymu;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Tym", inversedBy="turnaje")
@@ -73,9 +67,17 @@ class Turnaj
      */
     private $popis;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Uzivatel", inversedBy="piskam_utkani")
+     */
+    private $rozhodci;
+
+
+
     public function __construct()
     {
         $this->tymy = new ArrayCollection();
+        $this->rozhodci = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -119,29 +121,18 @@ class Turnaj
         return $this;
     }
 
-    public function getMinimumTymu(): ?int
+    public function getPocetTymu(): ?int
     {
-        return $this->minimum_tymu;
+        return $this->pocet_tymu;
     }
 
-    public function setMinimumTymu(int $minimum_tymu): self
+    public function setpocetTymu(int $pocet_tymu): self
     {
-        $this->minimum_tymu = $minimum_tymu;
+        $this->pocet_tymu = $pocet_tymu;
 
         return $this;
     }
 
-    public function getMaximumTymu(): ?int
-    {
-        return $this->maximum_tymu;
-    }
-
-    public function setMaximumTymu(int $maximum_tymu): self
-    {
-        $this->maximum_tymu = $maximum_tymu;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Tym[]
@@ -204,4 +195,33 @@ class Turnaj
 
         return $this;
     }
+
+    /**
+     * @return Collection|Uzivatel[]
+     */
+    public function getRozhodci(): Collection
+    {
+        return $this->rozhodci;
+    }
+
+    public function addRozhodci(Uzivatel $rozhodci): self
+    {
+        if (!$this->rozhodci->contains($rozhodci)) {
+            $this->rozhodci[] = $rozhodci;
+        }
+
+        return $this;
+    }
+
+    public function removeRozhodci(Uzivatel $rozhodci): self
+    {
+        if ($this->rozhodci->contains($rozhodci)) {
+            $this->rozhodci->removeElement($rozhodci);
+        }
+
+        return $this;
+    }
+
+
+
 }

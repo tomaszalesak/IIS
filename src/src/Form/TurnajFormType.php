@@ -6,6 +6,7 @@ use App\Entity\Turnaj;
 use App\Entity\Typ;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,8 +25,15 @@ class TurnajFormType extends AbstractType
             ])
             ->add('adresa')
             ->add('datum')
-            ->add('minimum_tymu',TextType::class, ['label' => 'Minimální počet týmů *'])
-            ->add('maximum_tymu',TextType::class, ['label' => 'Maximální počet týmů *'])
+            ->add('pocet_tymu', ChoiceType::class, [
+                'label' => 'Vyber počet týmů *',
+                'choices'  => [
+                    '4' => 4,
+                    '8' => 8,
+                    '16' => 16,
+                ],
+            ])
+
 
             ->add('typ',EntityType::class, [
                 'class' => Typ::class,

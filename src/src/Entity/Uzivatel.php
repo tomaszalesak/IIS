@@ -67,10 +67,21 @@ class Uzivatel implements UserInterface
      */
     private $vedouci_turnaje;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $je_rozhodci;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Turnaj", mappedBy="rozhodci")
+     */
+    private $piskam_utkani;
+
     public function __construct()
     {
         $this->tymy = new ArrayCollection();
         $this->vedouci_tymu = new ArrayCollection();
+        $this->piskam_utkani = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -271,4 +282,47 @@ class Uzivatel implements UserInterface
 
         return $this;
     }
+
+    public function getJeRozhodci(): ?int
+    {
+        return $this->je_rozhodci;
+    }
+
+    public function setJeRozhodci(?int $je_rozhodci): self
+    {
+        $this->je_rozhodci = $je_rozhodci;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Turnaj[]
+     */
+    public function getPiskamUtkani(): Collection
+    {
+        return $this->piskam_utkani;
+    }
+
+    public function addPiskamUtkani(Turnaj $piskamUtkani): self
+    {
+        if (!$this->piskam_utkani->contains($piskamUtkani)) {
+            $this->piskam_utkani[] = $piskamUtkani;
+            $piskamUtkani->addRozhodci($this);
+        }
+
+        return $this;
+    }
+
+    public function removePiskamUtkani(Turnaj $piskamUtkani): self
+    {
+        if ($this->piskam_utkani->contains($piskamUtkani)) {
+            $this->piskam_utkani->removeElement($piskamUtkani);
+            $piskamUtkani->removeRozhodci($this);
+        }
+
+        return $this;
+    }
+
+
+
 }

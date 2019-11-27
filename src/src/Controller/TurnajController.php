@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Turnaj;
 use App\Entity\Tym;
+use App\Entity\Uzivatel;
 use App\Form\TurnajFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -108,7 +109,7 @@ class TurnajController extends AbstractController
      * @Method({"DELETE"})
      * @IsGranted("ROLE_USER")
      */
-    public function odstranitTurnaj($id, Request $request, EntityManagerInterface $em)
+    public function odstranitTurnaj($id, EntityManagerInterface $em)
     {
         $turnaj = $em->getRepository(Turnaj::class)->find($id);
         $em->remove($turnaj);
@@ -120,21 +121,64 @@ class TurnajController extends AbstractController
     }
 
     /**
-     * @Route("/user/prihlasit_tym_turnaj/{turnaj_id}/{tym_id}", name="app_user_prihlasit_tym_turnaj")
-     * @Method({"DELETE"})
-     * @IsGranted("ROLE_USER")
-     */
-    public function prihlasitTymDoTurnaje($turnaj_id, $tym_id, Request $request, EntityManagerInterface $em)
+ * @Route("/user/prihlasit_tym_turnaj/{turnaj_id}/{tym_id}", name="app_user_prihlasit_tym_turnaj")
+ * @Method({"DELETE"})
+ * @IsGranted("ROLE_USER")
+ */
+    public function prihlasitTymDoTurnaje($turnaj_id, $tym_id, EntityManagerInterface $em)
     {
         $turnaj = $em->getRepository(Turnaj::class)->find($turnaj_id);
         $tym = $em->getRepository(Tym::class)->find($tym_id);
+        $rozhodci = $turnaj->getRozhodci();
+        $err = 0;
 
-        if(($turnaj->getTyp() == $tym->getTyp()) and $this->getUser() == $tym->getVedouci()){
+        foreach($rozhodci as $roz ){
+            if($tym->getUzivatele()->contains($roz)) {
+                $err = 1;
+                break;
+            }
+        }
+
+        $err_text = 'Nelze přidat tento tým';
+        if ($err == 1)
+            $err_text = 'Nelze přidat tento tým, protože nějaký člen týmu je rozhodčí tohoto turnaje';
+
+        if(($turnaj->getTyp() == $tym->getTyp()) and $this->getUser() == $tym->getVedouci() and $err == 0){
             $turnaj->addTymy($tym);
             $em->flush();
             $this->addFlash('success', 'Tým byl přidán');
         }else
-            $this->addFlash('err', 'Nelze přidat tento tým');
+            $this->addFlash('err', $err_text);
+
+
+
+        return $this->redirectToRoute('app_turnaj', ['nazev' => $turnaj->getNazev()]);
+    }
+
+    /**
+     * @Route("/user/prihlasit_rozhodci_turnaj/{turnaj_id}", name="app_user_prihlasit_rozhodci_turnaj")
+     * @IsGranted("ROLE_USER")
+     */
+    public function prihlasitRozhodcihoDoTurnaje($turnaj_id, EntityManagerInterface $em)
+    {
+        $turnaj = $em->getRepository(Turnaj::class)->find($turnaj_id);
+        $tymy = $turnaj->getTymy();
+        $err = 0;
+
+        foreach($tymy  as $tym){
+            if($tym->getUzivatele()->contains($this->getUser())) {
+                $err = 1;
+                break;
+            }
+        }
+        if($err == 1)
+            $this->addFlash('err', 'Nemůžeš se zapsat jako rozhodčí pokud, jsi v nějakém týmu na turnaji');
+        else{
+            $turnaj->addRozhodci($this->getUser());
+            $em->flush();
+            $this->addFlash('success', 'Byl jsi přidán jako rozhodčí');
+        }
+
         return $this->redirectToRoute('app_turnaj', ['nazev' => $turnaj->getNazev()]);
     }
 }

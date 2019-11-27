@@ -59,10 +59,23 @@ class Tym
      */
     private $turnaje;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Utkani", mappedBy="hoste")
+     */
+    private $utkani_hoste;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Utkani", mappedBy="domaci")
+     */
+    private $utkani_domaci;
+
+
     public function __construct()
     {
         $this->uzivatele = new ArrayCollection();
         $this->turnaje = new ArrayCollection();
+        $this->utkani_hoste = new ArrayCollection();
+        $this->utkani_domaci = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -183,4 +196,68 @@ class Tym
 
         return $this;
     }
+
+    /**
+     * @return Collection|Utkani[]
+     */
+    public function getUtkaniHoste(): Collection
+    {
+        return $this->utkani_hoste;
+    }
+
+    public function addUtkaniHoste(Utkani $utkaniHoste): self
+    {
+        if (!$this->utkani_hoste->contains($utkaniHoste)) {
+            $this->utkani_hoste[] = $utkaniHoste;
+            $utkaniHoste->setHoste($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUtkaniHoste(Utkani $utkaniHoste): self
+    {
+        if ($this->utkani_hoste->contains($utkaniHoste)) {
+            $this->utkani_hoste->removeElement($utkaniHoste);
+            // set the owning side to null (unless already changed)
+            if ($utkaniHoste->getHoste() === $this) {
+                $utkaniHoste->setHoste(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Utkani[]
+     */
+    public function getUtkaniDomaci(): Collection
+    {
+        return $this->utkani_domaci;
+    }
+
+    public function addUtkaniDomaci(Utkani $utkaniDomaci): self
+    {
+        if (!$this->utkani_domaci->contains($utkaniDomaci)) {
+            $this->utkani_domaci[] = $utkaniDomaci;
+            $utkaniDomaci->setDomaci($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUtkaniDomaci(Utkani $utkaniDomaci): self
+    {
+        if ($this->utkani_domaci->contains($utkaniDomaci)) {
+            $this->utkani_domaci->removeElement($utkaniDomaci);
+            // set the owning side to null (unless already changed)
+            if ($utkaniDomaci->getDomaci() === $this) {
+                $utkaniDomaci->setDomaci(null);
+            }
+        }
+
+        return $this;
+    }
+
+
 }

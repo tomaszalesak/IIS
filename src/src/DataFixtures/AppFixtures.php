@@ -109,8 +109,8 @@ class AppFixtures extends Fixture
         $turnaj->setVedouci($uzivatel);
         $turnaj->setTyp($typ);
         $turnaj->setDatum(new \DateTime());
-        $turnaj->setMinimumTymu(2);
-        $turnaj->setMaximumTymu(5);
+        $turnaj->setpocetTymu(8);
+
 
         $turnaj->addTymy($tym);
         $turnaj->addTymy($tym1);

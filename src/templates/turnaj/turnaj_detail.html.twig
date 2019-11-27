@@ -2,126 +2,139 @@
 
 {% block body %}
     <div class="container">
-    <div class = "row">
-    {% if is_granted('ROLE_USER') and turnaj.vedouci == app.user %}
-        <div class="d-flex justify-content-between">
-            <div>
-                <h2>{{ turnaj.nazev }}</h2>
-            </div>
-            <div>
-                <a class="btn btn-secondary" href="{{ path('app_user_zmena_turnaj', {nazev: turnaj.nazev}) }}" role="submit"> <i class="fas fa-edit"></i>  Upravit</a>
-                <button class="btn btn-danger my-2 my-sm-0" type="button" data-toggle="modal" data-target="#Modal1"> <i class="fas fa-trash-alt"></i>  Odstranit</button>
-                <!-- Modal -->
-                <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Odstranění</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                Určitě chcete tento turnaj odstranit?
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
-                                <a class="btn btn-danger" role="submit" href="{{ path('app_user_odstranit_turnaj', {id: turnaj.id}) }}" >Odstranit</a>
-                            </div>
-                        </div>
-                    </div>
+        {% if is_granted('ROLE_USER') and turnaj.vedouci == app.user %}
+            <div class="d-flex justify-content-between">
+                <div>
+                    <h2>{{ turnaj.nazev }}</h2>
                 </div>
-            </div>
-        </div>
-    {% else %}
-        <h2>{{ turnaj.nazev }}</h2>
-    {% endif %}
-
-        <br >
-
-        <table class="table table-striped">
-            <tbody>
-            <tr>
-                <th><b> Datum </b></th>
-                <th>{{ turnaj.datum|date("d.m.Y") }}</th>
-                <th><b> Místo </b></th>
-                <th>{{ turnaj.adresa }}</th>
-            </tr>
-            <tr>
-                <th><b> Typ </b></th>
-                <th>{{ turnaj.typ.nazev }}</th>
-                <th><b> Volné místo (týmy) </b></th>
-                <th>{{ turnaj.maximumtymu - turnaj.tymy|length }} / {{turnaj.maximumtymu}}</th>
-            </tr>
-
-            {% if is_granted('ROLE_USER') %}
-                <tr>
-                    <th>Přihlásit tým do turnaje</th>
-                    <th></th>
-                    <th></th>
-                    <th><button class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#Modal2">Přihlásit</button></th>
-
+                <div>
+                    <a class="btn btn-secondary" href="{{ path('app_user_zmena_turnaj', {nazev: turnaj.nazev}) }}" role="submit"> <i class="fas fa-edit"></i>  Upravit</a>
+                    <button class="btn btn-danger my-2 my-sm-0" type="button" data-toggle="modal" data-target="#Modal1"> <i class="fas fa-trash-alt"></i>  Odstranit</button>
                     <!-- Modal -->
-                    <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="Modal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title" id="exampleModalLabel">Jaký z týmů chceš přihlásit?</h4>
+                                    <h5 class="modal-title" id="exampleModalLabel">Odstranění</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                        {% for tym in app.user.tymy %}
-                                            {% if tym.typ == turnaj.typ and tym.vedouci == app.user and  tym not in turnaj.tymy  %}
-                                                <a  href="{{ path('app_user_prihlasit_tym_turnaj', {turnaj_id: turnaj.id, tym_id: tym.id }) }}">{{ tym.jmeno }}</a>
-                                            {% endif %}
-                                        {% endfor %}
+                                    Určitě chcete tento turnaj odstranit?
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                                    <a class="btn btn-danger" role="submit" href="{{ path('app_user_odstranit_turnaj', {id: turnaj.id}) }}" >Odstranit</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        {% else %}
+            <h2>{{ turnaj.nazev }}</h2>
+        {% endif %}
+            <br >
 
-
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <th><b> Datum </b></th>
+                    <th>{{ turnaj.datum|date("d.m.Y") }}</th>
+                    <th><b> Místo </b></th>
+                    <th>{{ turnaj.adresa }}</th>
                 </tr>
                 <tr>
-                    <th>Přihlásit se jako rozhodčí</th>
-                    <th></th>
-                    <th></th>
-                    <th><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Přihlásit</button></th>
+                    <th><b> Typ </b></th>
+                    <th>{{ turnaj.typ.nazev }}</th>
+                    <th><b> Volné místo (týmy) </b></th>
+                    <th>{{ turnaj.pocettymu - turnaj.tymy|length }} / {{turnaj.pocettymu}}</th>
                 </tr>
-            {% endif %}
-            </tbody>
-        </table>
-    </div>
+
+                {% if is_granted('ROLE_USER') %}
+                    <tr>
+                        <th>Přihlásit tým do turnaje</th>
+                        <th></th>
+                        <th></th>
+                        {% if turnaj.pocettymu == turnaj.tymy|length %}
+                            <th><button class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#Modal2" disabled>Přihlásit</button></th>
+                        {% else %}
+                            <th><button class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#Modal2">Přihlásit</button></th>
+                        {% endif %}
+                        <!-- Modal -->
+                        <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title" id="exampleModalLabel">Jaký z týmů chceš přihlásit?</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                            {% for tym in app.user.tymy %}
+                                                {% if tym.typ == turnaj.typ and tym.vedouci == app.user and  tym not in turnaj.tymy  %}
+                                                    <a  href="{{ path('app_user_prihlasit_tym_turnaj', {turnaj_id: turnaj.id, tym_id: tym.id }) }}">{{ tym.jmeno }}</a><br>
+                                                {% endif %}
+                                            {% endfor %}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </tr>
+                    <tr>
+                        <th>Přihlásit se jako rozhodčí</th>
+                        <th></th>
+                        <th></th>
+                        {% if turnaj.rozhodci|length == 2  or app.user in turnaj.rozhodci %}
+                            <th><a class="btn btn-outline-success disabled" href="{{ path('app_user_prihlasit_rozhodci_turnaj',{turnaj_id: turnaj.id }) }}" role="button">Přihlásit</a></th>
+                        {% else %}
+                            <th><a class="btn btn-outline-success" href="{{ path('app_user_prihlasit_rozhodci_turnaj',{turnaj_id: turnaj.id }) }}" role="button">Přihlásit</a></th>
+                        {% endif %}
+                    </tr>
+                    <tr>
+                        <th><b> Rozhodčí 1 </b></th>
+                        <th><b> Rozhodčí 2 </b></th>
+                    </tr>
+                    <tr>
+                        {% for rozhodci in turnaj.rozhodci %}
+                            <th><b> {{ rozhodci.jmeno }} {{ rozhodci.prijmeni }}  </b></th>
+                        {% endfor %}
+                    </tr>
+                {% endif %}
+                </tbody>
+            </table>
+
+
+            <div class="row">
+                <h3> Popis</h3>
+            </div>
+            <div class="row">
+                {{ turnaj.popis }}
+            </div>
 
         <div class="row">
-            <h3> Popis</h3>
+            <h3> Týmy zapsané na turnaj</h3>
         </div>
         <div class="row">
-            {{ turnaj.popis }}
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    {% for tym in turnaj.tymy %}
+                        <th> <a href="{{ path('app_tym', {nazev: tym.jmeno}) }}"> {{ tym.jmeno }} </a></th>
+                    {% endfor %}
+                </tr>
+                </tbody>
+            </table>
         </div>
 
-    <div class="row">
-        <h3> Týmy zapsané na turnaj</h3>
-    </div>
-    <div class="row">
-        <table class="table table-striped">
-            <tbody>
-            <tr>
-                {% for tym in turnaj.tymy %}
-                    <th> <a href="{{ path('app_tym', {nazev: tym.jmeno}) }}"> {{ tym.jmeno }} </a></th>
-                {% endfor %}
-            </tr>
-            </tbody>
-        </table>
-    </div>
+        </div>
 
-    </div>
-
-    </div>
 
 {% endblock %}
