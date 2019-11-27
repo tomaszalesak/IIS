@@ -1,4 +1,5 @@
 # IIS
+
 IIS: Sport: správa turnajů, registrace hráčů a zadávání výsledků
 
 <table cellpadding="2" style="max-width: 700px"><tbody><tr><td><b>Společná část popisu:</b></td></tr>
@@ -170,3 +171,47 @@ rozšíření:</b></p>
 	popis statistik a událostí zápasu, jednoduché zadávání těchto   
 	událostí rozhodčím turnaje</p>
   </li></ul></td></tr></tbody></table>
+
+
+# Nasazení
+
+Linky s užitečnými informacemi
+
+- https://www.digitalocean.com/community/tutorials/how-to-deploy-a-symfony-4-application-to-production-with-lemp-on-ubuntu-18-04
+
+Each time you log in to the eva server, a brief instruction is shown; here is the summary:
+Create a WWW directory: mkdir ~/WWW in the home directory
+set permissions: chmod -R o=rX,g= ~/WWW (i.e. a permission to read and execute for everyone but prohibited writing and no group permissions)
+set permissions for home directory as follows: chmod o=x ~
+the WWW directory must contain a valid index.html or index.php file. HTML files must be readable "for everyone" - chmod o+r. PHP scripts are executed under your identity; therefore, they must be readable for owner (usually the default setting).
+to check the permissions - example:
+```
+eva ~> chmod -R o=rX,g= WWW
+eva ~> ls -ld WWW
+drwx---r-x  2 xtest99  vti-fekt  512 21 oct 16:10 WWW
+eva ~> ls -l WWW
+total 0
+-rw-r-----  1 xtest99  vti-fekt  0 21 oct 16:17 index.php
+eva ~> chmod o+r WWW/index.php
+eva ~> ls -l WWW
+total 0
+rw-r--r--  1 xtest99  vti-fekt  0 21 oct 16:17 index.php
+```
+
+.htaccess
+ ```
+DefaultCharset utf-8
+AddHandler application/x-httpd-php73 .php
+ ```
+
+ .env
+ ```
+ APP_ENV=prod
+ DATABASE_URL=mysql://xzales13:heslo@localhost/xzales13
+ ```
+
+```
+php bin/Console server:run
+php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load
+```
