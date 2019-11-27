@@ -210,6 +210,13 @@ AddHandler application/x-httpd-php72 .php
  DATABASE_URL=mysql://xzales13:heslo@localhost/xzales13
  ```
 
+install composer locally
+```
+php72 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php72 composer-setup.php
+php72 -r "unlink('composer-setup.php');"
+```
+
 ```
 php bin/Console server:run
 php bin/console doctrine:migrations:migrate
