@@ -45,12 +45,12 @@ class Tym
     private $vedouci;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", length=1024, nullable=true)
      */
     private $popis;
 
     /**
-     * @ORM\Column(type="text", length=1024, nullable=true)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $adresa;
 
