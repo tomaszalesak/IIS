@@ -33,11 +33,11 @@ class AppFixtures extends Fixture
         $manager->persist($typ3);
         $manager->flush();
 
-        $typ = new Typ();
-        $typ->setNazev("5x5");
-        $typ->setPocetClenuTymu(12);
+        $typ5 = new Typ();
+        $typ5->setNazev("5x5");
+        $typ5->setPocetClenuTymu(12);
 
-        $manager->persist($typ);
+        $manager->persist($typ5);
         $manager->flush();
 
         $typ = new Typ();
@@ -222,18 +222,33 @@ class AppFixtures extends Fixture
 
 
 //Tymy
-        $tym1= new Tym();
-        $tym1->setJmeno("Basket Ruda");
-        $tym1->setAdresa("Hospoda u Malců, Ruda 1");
-        $tym1->setPopis("Parta lidí z Velké Bíteše, Scházíme se každou neděli v sedm hodin na Rudě");
-        $tym1->setVedouci($uzivatel);
-        $tym1->addUzivatele($uzivatel);
-        $tym1->setTyp($typ);
+        //1v1
+        $users = array($uzivatel, $uzivatel1, $franta, $pepa, $petr);
+        $addresses = array("Ruda 30","Lánice 51, Velká Bíteš", "Březí 12", "Křoví 3", "Jabloňnov 24");
+        $userTeams = array();
 
-        $manager->persist($tym1);
-        $manager->flush();
+        $i=0;
+        foreach ($users as $user) {
+            $tym1 = new Tym();
+            $jmeno = $user->getJmeno()." ".$user->getPrijmeni();
+            $tym1->setJmeno($jmeno);
+
+            $tym1->setAdresa($addresses[$i]);
+
+            $tym1->setPopis("");
+            $tym1->setVedouci($user);
+            $tym1->addUzivatele($user);
+            $tym1->setTyp($typ);
+
+            $manager->persist($tym1);
+            $manager->flush();
+
+            $userTeams[$i] = $tym1;
+            $i= $i+1;
+        }
 
 
+        //3v3
         $jablonov= new Tym();
         $jablonov->setJmeno("TJ Druzstevnik Jablonov");
         $jablonov->setAdresa("Hospoda U Šídlů, Jablonov 1");
@@ -303,7 +318,7 @@ class AppFixtures extends Fixture
         $turnaj->setVedouci($uzivatel);
         $turnaj->setTyp($typ1);
         $turnaj->setDatum(new \DateTime());
-        $turnaj->setpocetTymu(8);
+        $turnaj->setpocetTymu(4);
 
         $turnaj->addTymy($tym);
         $turnaj->addTymy($tym1);
@@ -320,13 +335,70 @@ class AppFixtures extends Fixture
         $turnaj->setTyp($typ3);
         $turnaj->setDatum(new \DateTime("2020-04-01"));
 
-        $turnaj->setpocetTymu(5);
+        $turnaj->setpocetTymu(4);
 
         $turnaj->addTymy($jablonov);
         $turnaj->addTymy($hermanice);
 
         $manager->persist($turnaj);
         $manager->flush();
+
+        $turnaj = new Turnaj();
+        $turnaj->setNazev("3v3 na Rudě");
+        $turnaj->setAdresa("Malé hřiště, Ruda");
+        $turnaj->setPopis("Zveme vás na první ročník Basketbalového turnaje pro tří až pětičlenné týmy !! který se uskuteční 1.9.2019 v Rudě u Velkého Meziříčí. Zahájení se koná ve 14 hodin na malém hřišti. Herní systém 3v3. K poslechu a tanci zahraje skupina Galáni.");
+        $turnaj->setVedouci($uzivatel);
+        $turnaj->setTyp($typ3);
+        $turnaj->setDatum(new \DateTime("2019-09-01"));
+        $turnaj->setpocetTymu(4);
+
+        $turnaj->addTymy($bitesB);
+        //TODO: pridat tymy
+        $manager->persist($turnaj);
+        $manager->flush();
+
+        $turnaj = new Turnaj();
+        $turnaj->setNazev("Děravý koš");
+        $turnaj->setAdresa("Sportovní Hala, Osová Bitýška");
+        $turnaj->setPopis("Zveme vás na turnaj děravý koš pro jednotlivce, který se uskuteční 1. 6. 2019 v rámci sportovního dne v Osové Bitýšce. Registrace proběhne ve 13. hodin ve sportovní hale Základní Školy.");
+        $turnaj->setVedouci($uzivatel);
+        $turnaj->setTyp($typ1);
+        $turnaj->addRozhodci($slavek);
+        $turnaj->setDatum(new \DateTime("2019-06-01"));
+        $turnaj->setpocetTymu(4);
+
+        for ($x = 0; $x < 4; $x++) {
+            $turnaj->addTymy($userTeams[$x]);
+        }
+
+        $manager->persist($turnaj);
+        $manager->flush();
+
+        //5v5
+        $turnaj = new Turnaj();
+        $turnaj->setNazev("Turnaj o město Tišnov");
+        $turnaj->setAdresa("Tišnov, Sokolovna");
+        $turnaj->setPopis("Zveme vas na Turnaj o město Tišnov, který se uskuteční 1. 12. 2019 v Tišnovské sokolovně. Slavnostní zahájení je v 15.00. K poslechu a tanci zahraje skupina Accort. Připravena zábava i pro celou rodinu.");
+        $turnaj->setVedouci($slavek);
+        $turnaj->setTyp($typ3);
+        $turnaj->setDatum(new \DateTime("2020-10-23"));
+        $turnaj->setpocetTymu(4);
+        //TODO: pridat tymy
+        $manager->persist($turnaj);
+        $manager->flush();
+
+        $turnaj = new Turnaj();
+        $turnaj->setNazev("Slivovica Cup");
+        $turnaj->setAdresa("Jabloňov, hřiště");
+        $turnaj->setPopis("Zveme Vás na tradiční Slivovica cup, který se uskuteční 13.3.2019 na hřišti v obci Jabloňov. Jedná se o turnaj pro 4 týmy systémem 5v5, přičemž vítěz obdrží 1 litr kvalitní slivovice z místní pěstitelské pálenice.");
+        $turnaj->setVedouci($uzivatel);
+        $turnaj->setTyp($typ5);
+        $turnaj->setDatum(new \DateTime("2020-03-22"));
+        $turnaj->setpocetTymu(4);
+        //TODO: pridat tymy
+        $manager->persist($turnaj);
+        $manager->flush();
+
 
 
     }
