@@ -173,7 +173,7 @@ rozšíření:</b></p>
   </li></ul></td></tr></tbody></table>
 
 
-# Nasazení
+# Informace k nasazení
 
 Linky s užitečnými informacemi
 
@@ -222,5 +222,25 @@ php bin/Console server:run
 php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 php bin/console doctrine:schema:update --force
+chmod -R 755 ~/WWW/.*
+```
+
+## Postup nasazení na Evu
+
+```
+ssh eva
+cd ~/WWW
+git clone git@github.com:tomaszalesak/IIS.git
+cd IIS
+php72 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php72 composer-setup.php
+php72 -r "unlink('composer-setup.php');"
+php72 composer.phar install
+```
+
+V .env zvol databázi na evě.
+
+```
+php72 bin/console doctrine:migrations:migrate
 chmod -R 755 ~/WWW/.*
 ```
