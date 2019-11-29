@@ -1,0 +1,50 @@
+/*
+ *  Flex Layout Specifics
+*/
+main{
+    display:flex;
+    flex-direction:row;
+  }
+  .round{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    width:20em;
+    list-style:none;
+    padding:0;
+  }
+    .round .spacer{ flex-grow:1; }
+    .round .spacer:first-child,
+    .round .spacer:last-child{ flex-grow:.5; }
+  
+    .round .game-spacer{
+      flex-grow:1;
+    }
+  
+  /*
+   *  General Styles
+  */
+  
+  li.game{
+    padding-left:1em;
+  }
+  
+    li.game.winner{
+      font-weight:bold;
+      color: green;
+    }
+    li.game span{
+      float:right;
+      margin-right:0.5em;
+    }
+  
+    li.game-top{ border-bottom:0.2em solid #aaa; }
+  
+    li.game-spacer{ 
+      border-right:0.2em solid #aaa;
+      min-height:3em;
+    }
+  
+    li.game-bottom{ 
+      border-top:0.2em solid #aaa;
+    }
