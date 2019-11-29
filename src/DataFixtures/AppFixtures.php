@@ -316,6 +316,274 @@ class AppFixtures extends Fixture
         $manager->persist($zdenek);
         $manager->flush();
 
+
+        $katerina = new Uzivatel();
+        $katerina->setUsername("katerina");
+        $katerina->setJmeno("Kateřina");
+        $katerina->setPrijmeni("Pokorná");
+        $katerina->setPassword($this->encoder->encodePassword($katerina, 'heslo01'));
+        $katerina->setDatumNarozeni(new \DateTime("1998-06-17"));
+
+        $manager->persist($katerina);
+        $manager->flush();
+
+
+        $vera = new Uzivatel();
+        $vera->setUsername("vera");
+        $vera->setJmeno("Věra");
+        $vera->setPrijmeni("Kratochvílová");
+        $vera->setPassword($this->encoder->encodePassword($vera, 'heslo01'));
+        $vera->setDatumNarozeni(new \DateTime("1996-06-17"));
+
+        $manager->persist($vera);
+        $manager->flush();
+
+        $alena = new Uzivatel();
+        $alena->setUsername("alena");
+        $alena->setJmeno("Alena");
+        $alena->setPrijmeni("Kvapilová");
+        $alena->setPassword($this->encoder->encodePassword($alena, 'heslo01'));
+        $alena->setDatumNarozeni(new \DateTime("1996-06-17"));
+
+        $manager->persist($alena);
+        $manager->flush();
+
+
+        $viktor = new Uzivatel();
+        $viktor->setUsername("viktor");
+        $viktor->setJmeno("Viktor");
+        $viktor->setPrijmeni("Brhel");
+        $viktor->setPassword($this->encoder->encodePassword($viktor, 'heslo01'));
+        $viktor->setDatumNarozeni(new \DateTime("1956-06-17"));
+
+        $manager->persist($viktor);
+        $manager->flush();
+
+
+        $vendelin = new Uzivatel();
+        $vendelin->setUsername("vendelin");
+        $vendelin->setJmeno("Vendelín");
+        $vendelin->setPrijmeni("Nezval");
+        $vendelin->setPassword($this->encoder->encodePassword($vendelin, 'heslo01'));
+        $vendelin->setDatumNarozeni(new \DateTime("1966-11-10"));
+
+        $manager->persist($vendelin);
+        $manager->flush();
+
+
+        $radek = new Uzivatel();
+        $radek->setUsername("radek");
+        $radek->setJmeno("Radek");
+        $radek->setPrijmeni("Šťastný");
+        $radek->setPassword($this->encoder->encodePassword($radek, 'heslo01'));
+        $radek->setDatumNarozeni(new \DateTime("1960-01-08"));
+
+        $manager->persist($radek);
+        $manager->flush();
+
+
+        $jindrich = new Uzivatel();
+        $jindrich->setUsername("jindrich");
+        $jindrich->setJmeno("Jindřich");
+        $jindrich->setPrijmeni("Dostál");
+        $jindrich->setPassword($this->encoder->encodePassword($jindrich, 'heslo01'));
+        $jindrich->setDatumNarozeni(new \DateTime("1966-05-08"));
+
+        $manager->persist($jindrich);
+        $manager->flush();
+
+
+        $radim = new Uzivatel();
+        $radim->setUsername("radim");
+        $radim->setJmeno("Radim");
+        $radim->setPrijmeni("Vrzal");
+        $radim->setPassword($this->encoder->encodePassword($radim, 'heslo01'));
+        $radim->setDatumNarozeni(new \DateTime("1996-07-18"));
+
+        $manager->persist($radim);
+        $manager->flush();
+
+        $silvin = new Uzivatel();
+        $silvin->setUsername("silvin");
+        $silvin->setJmeno("Silvestr");
+        $silvin->setPrijmeni("Novotný");
+        $silvin->setPassword($this->encoder->encodePassword($silvin, 'heslo01'));
+        $silvin->setDatumNarozeni(new \DateTime("1996-01-18"));
+
+        $manager->persist($silvin);
+        $manager->flush();
+
+        $cenek = new Uzivatel();
+        $cenek->setUsername("cenek");
+        $cenek->setJmeno("Čeněk");
+        $cenek->setPrijmeni("Kafka");
+        $cenek->setPassword($this->encoder->encodePassword($cenek, 'heslo01'));
+        $cenek->setDatumNarozeni(new \DateTime("1996-10-18"));
+
+        $manager->persist($cenek);
+        $manager->flush();
+
+
+        $lukas = new Uzivatel();
+        $lukas->setUsername("lukas");
+        $lukas->setJmeno("Lukáš");
+        $lukas->setPrijmeni("Toušek");
+        $lukas->setPassword($this->encoder->encodePassword($lukas, 'heslo01'));
+        $lukas->setDatumNarozeni(new \DateTime("1976-12-18"));
+
+        $manager->persist($lukas);
+        $manager->flush();
+
+        $simon = new Uzivatel();
+        $simon->setUsername("simon");
+        $simon->setJmeno("Šimon");
+        $simon->setPrijmeni("Toušek");
+        $simon->setPassword($this->encoder->encodePassword($simon, 'heslo01'));
+        $simon->setDatumNarozeni(new \DateTime("1999-12-18"));
+
+        $manager->persist($simon);
+        $manager->flush();
+
+        $vavrinec = new Uzivatel();
+        $vavrinec->setUsername("vavrinec");
+        $vavrinec->setJmeno("Vavřinec");
+        $vavrinec->setPrijmeni("Řezník");
+        $vavrinec->setPassword($this->encoder->encodePassword($vavrinec, 'heslo01'));
+        $vavrinec->setDatumNarozeni(new \DateTime("1991-06-07"));
+        $manager->persist($vavrinec);
+        $manager->flush();
+
+        $evzen = new Uzivatel();
+        $evzen->setUsername("evzen");
+        $evzen->setJmeno("Evžen");
+        $evzen->setPrijmeni("Dufek");
+        $evzen->setPassword($this->encoder->encodePassword($evzen, 'heslo01'));
+        $evzen->setDatumNarozeni(new \DateTime("1981-02-26"));
+        $manager->persist($evzen);
+        $manager->flush();
+
+        $ivan = new Uzivatel();
+        $ivan->setUsername("ivan");
+        $ivan->setJmeno("Ivan");
+        $ivan->setPrijmeni("Jakeš");
+        $ivan->setPassword($this->encoder->encodePassword($ivan, 'heslo01'));
+        $ivan->setDatumNarozeni(new \DateTime("1992-12-27"));
+        $manager->persist($ivan);
+        $manager->flush();
+
+
+        $vratislav = new Uzivatel();
+        $vratislav->setUsername("vratislav");
+        $vratislav->setJmeno("Vratislav");
+        $vratislav->setPrijmeni("Kulíšek");
+        $vratislav->setPassword($this->encoder->encodePassword($vratislav, 'heslo01'));
+        $vratislav->setDatumNarozeni(new \DateTime("1989-04-20"));
+        $manager->persist($vratislav);
+        $manager->flush();
+
+        $kvetoslav = new Uzivatel();
+        $kvetoslav->setUsername("kvetoslav");
+        $kvetoslav->setJmeno("Květoslav");
+        $kvetoslav->setPrijmeni("Velíšek");
+        $kvetoslav->setPassword($this->encoder->encodePassword($kvetoslav, 'heslo01'));
+        $kvetoslav->setDatumNarozeni(new \DateTime("1990-11-02"));
+        $manager->persist($kvetoslav);
+        $manager->flush();
+
+
+        $jachym = new Uzivatel();
+        $jachym->setUsername("jachym");
+        $jachym->setJmeno("Jáchym");
+        $jachym->setPrijmeni("Köhler");
+        $jachym->setPassword($this->encoder->encodePassword($jachym, 'heslo01'));
+        $jachym->setDatumNarozeni(new \DateTime("1993-06-08"));
+        $manager->persist($jachym);
+        $manager->flush();
+
+
+        $leopold = new Uzivatel();
+        $leopold->setUsername("leopold");
+        $leopold->setJmeno("Leopold");
+        $leopold->setPrijmeni("Vyoral");
+        $leopold->setPassword($this->encoder->encodePassword($leopold, 'heslo01'));
+        $leopold->setDatumNarozeni(new \DateTime("1979-09-17"));
+        $manager->persist($leopold);
+        $manager->flush();
+
+        $hanus = new Uzivatel();
+        $hanus->setUsername("hanus");
+        $hanus->setJmeno("Hanuš");
+        $hanus->setPrijmeni("Dokulil");
+        $hanus->setPassword($this->encoder->encodePassword($hanus, 'heslo01'));
+        $hanus->setDatumNarozeni(new \DateTime("1979-03-13"));
+        $manager->persist($hanus);
+        $manager->flush();
+
+        $vilem = new Uzivatel();
+        $vilem->setUsername("vilem");
+        $vilem->setJmeno("Vilém");
+        $vilem->setPrijmeni("Kubíček");
+        $vilem->setPassword($this->encoder->encodePassword($vilem, 'heslo01'));
+        $vilem->setDatumNarozeni(new \DateTime("1992-03-02"));
+        $manager->persist($vilem);
+        $manager->flush();
+
+
+        $lubomir = new Uzivatel();
+        $lubomir->setUsername("lubomir");
+        $lubomir->setJmeno("Lubomír");
+        $lubomir->setPrijmeni("Špičák");
+        $lubomir->setPassword($this->encoder->encodePassword($lubomir, 'heslo01'));
+        $lubomir->setDatumNarozeni(new \DateTime("2001-01-03"));
+        $manager->persist($lubomir);
+        $manager->flush();
+
+        $zbynek = new Uzivatel();
+        $zbynek->setUsername("zbynek");
+        $zbynek->setJmeno("Zbyněk");
+        $zbynek->setPrijmeni("Stýblo");
+        $zbynek->setPassword($this->encoder->encodePassword($zbynek, 'heslo01'));
+        $zbynek->setDatumNarozeni(new \DateTime("1988-09-13"));
+        $manager->persist($zbynek);
+        $manager->flush();
+
+        $bohuslav = new Uzivatel();
+        $bohuslav->setUsername("bohuslav");
+        $bohuslav->setJmeno("Bohuslav");
+        $bohuslav->setPrijmeni("Bečka");
+        $bohuslav->setPassword($this->encoder->encodePassword($bohuslav, 'heslo01'));
+        $bohuslav->setDatumNarozeni(new \DateTime("1982-01-26"));
+        $manager->persist($bohuslav);
+        $manager->flush();
+
+
+        $bonifac = new Uzivatel();
+        $bonifac->setUsername("bonifac");
+        $bonifac->setJmeno("Bonifác");
+        $bonifac->setPrijmeni("Hrnčíř");
+        $bonifac->setPassword($this->encoder->encodePassword($bonifac, 'heslo01'));
+        $bonifac->setDatumNarozeni(new \DateTime("1998-02-25"));
+        $manager->persist($bonifac);
+        $manager->flush();
+
+        $oleg = new Uzivatel();
+        $oleg->setUsername("oleg");
+        $oleg->setJmeno("Oleg");
+        $oleg->setPrijmeni("Vach");
+        $oleg->setPassword($this->encoder->encodePassword($oleg, 'heslo01'));
+        $oleg->setDatumNarozeni(new \DateTime("1997-10-17"));
+        $manager->persist($oleg);
+        $manager->flush();
+
+        $servac = new Uzivatel();
+        $servac->setUsername("servac");
+        $servac->setJmeno("Servác");
+        $servac->setPrijmeni("Křepelka");
+        $servac->setPassword($this->encoder->encodePassword($servac, 'heslo01'));
+        $servac->setDatumNarozeni(new \DateTime("1996-03-31"));
+        $manager->persist($servac);
+        $manager->flush();
+
 //Tymy
         //1v1
         $users = array($uzivatel, $uzivatel1, $franta, $pepa, $petr);
@@ -654,7 +922,177 @@ class AppFixtures extends Fixture
         $manager->persist($turnaj);
         $manager->flush();
         
+
+
+        $budisov = new Tym();
+        $budisov->setJmeno("TJ Budisov");
+        $budisov->setAdresa("budisov 202");
+        $budisov->setPopis("");
         
+        $budisov->setVedouci($vera);
+        $budisov->addUzivatele($vera);
+        $budisov->addUzivatele($katerina);
+        $budisov->addUzivatele($alena);
+
+        $budisov->setTyp($typ3);
+
+        $manager->persist($budisov);
+        $manager->flush();
+        $Turnaj1Tymy[8] = $budisov;
+
+
+        $kamenice = new Tym();
+        $kamenice->setJmeno("TJ Kamenice");
+        $kamenice->setAdresa("Kamenice 22");
+        $kamenice->setPopis("");
+        
+        $kamenice->setVedouci($viktor);
+        $kamenice->addUzivatele($viktor);
+        $kamenice->addUzivatele($vendelin);
+        $kamenice->addUzivatele($radek);
+
+        $kamenice->setTyp($typ3);
+
+        $manager->persist($kamenice);
+        $manager->flush();
+        $Turnaj1Tymy[9] = $kamenice;
+
+
+        $kamenna = new Tym();
+        $kamenna->setJmeno("SK Kamenná");
+        $kamenna->setAdresa("Kamenná 36");
+        $kamenna->setPopis("");
+        
+        $kamenna->setVedouci($jindrich);
+        $kamenna->addUzivatele($jindrich);
+        $kamenna->addUzivatele($radim);
+        $kamenna->addUzivatele($silvin);
+
+        $kamenna->setTyp($typ3);
+
+        $manager->persist($kamenna);
+        $manager->flush();
+        $Turnaj1Tymy[10] = $kamenna;
+
+
+        $baliny = new Tym();
+        $baliny->setJmeno("SK Baliny");
+        $baliny->setAdresa("baliny 32");
+        $baliny->setPopis("");
+        
+        $baliny->setVedouci($cenek);
+        $baliny->addUzivatele($cenek);
+        $baliny->addUzivatele($lukas);
+        $baliny->addUzivatele($simon);
+
+        $baliny->setTyp($typ3);
+
+        $manager->persist($baliny);
+        $manager->flush();
+        $Turnaj1Tymy[11] = $baliny;
+
+        $oslava = new Tym();
+        $oslava->setJmeno("SK Oslava");
+        $oslava->setAdresa("oslava 12");
+        $oslava->setPopis("");
+        
+        $oslava->setVedouci($vavrinec);
+        $oslava->addUzivatele($vavrinec);
+        $oslava->addUzivatele($evzen);
+        $oslava->addUzivatele($ivan);
+
+        $oslava->setTyp($typ3);
+
+        $manager->persist($oslava);
+        $manager->flush();
+        $Turnaj1Tymy[12] = $oslava;
+
+
+        $nedvedice = new Tym();
+        $nedvedice->setJmeno("SK Nedvědice");
+        $nedvedice->setAdresa("Nedvědice 15");
+        $nedvedice->setPopis("");
+        
+        $nedvedice->setVedouci($vratislav);
+        $nedvedice->addUzivatele($vratislav);
+        $nedvedice->addUzivatele($kvetoslav);
+        $nedvedice->addUzivatele($jachym);
+
+        $nedvedice->setTyp($typ3);
+
+        $manager->persist($nedvedice);
+        $manager->flush();
+        $Turnaj1Tymy[13] = $nedvedice;
+
+      
+        $polnicka = new Tym();
+        $polnicka->setJmeno("SK Polnička");
+        $polnicka->setAdresa("Polnička 25");
+        $polnicka->setPopis("");
+        
+        $polnicka->setVedouci($leopold);
+        $polnicka->addUzivatele($leopold);
+        $polnicka->addUzivatele($hanus);
+        $polnicka->addUzivatele($vilem);
+
+        $polnicka->setTyp($typ3);
+
+        $manager->persist($polnicka);
+        $manager->flush();
+        $Turnaj1Tymy[14] = $polnicka;
+
+
+        $kadolec = new Tym();
+        $kadolec->setJmeno("SK Kadolec");
+        $kadolec->setAdresa("Kadoelc 35");
+        $kadolec->setPopis("");
+        
+        $kadolec->setVedouci($lubomir);
+        $kadolec->addUzivatele($lubomir);
+        $kadolec->addUzivatele($zbynek);
+        $kadolec->addUzivatele($bohuslav);
+
+        $kadolec->setTyp($typ3);
+
+        $manager->persist($kadolec);
+        $manager->flush();
+        $Turnaj1Tymy[15] = $kadolec;
+
+        $zablati = new Tym();
+        $zablati->setJmeno("TJ Záblatí");
+        $zablati->setAdresa("zablati 11");
+        $zablati->setPopis("");
+        
+        $zablati->setVedouci($bonifac);
+        $zablati->addUzivatele($bonifac);
+        $zablati->addUzivatele($oleg);
+        $zablati->addUzivatele($servac);
+
+        $zablati->setTyp($typ3);
+
+        $manager->persist($zablati);
+        $manager->flush();
+        $Turnaj1Tymy[16] = $zablati;
+
+
+
+        $turnaj = new Turnaj();
+        $turnaj->setNazev("Jmeno Turnaje");
+        $turnaj->setAdresa("Napajedla, sokolovna");
+        $turnaj->setPopis("popis turnaje");
+        $turnaj->setVedouci($slavek);
+        $turnaj->setTyp($typ3);
+        $turnaj->addRozhodci($slavek);
+        $turnaj->addRozhodci($rozhodci);
+        $turnaj->setDatum(new \DateTime("2019-05-11"));
+        $turnaj->setpocetTymu(16);
+
+        for ($x = 0; $x < 16; $x++) {
+            $turnaj->addTymy($Turnaj1Tymy[$x]);
+        }
+
+        $manager->persist($turnaj);
+        $manager->flush();
 
     }
 }
