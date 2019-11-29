@@ -231,6 +231,90 @@ class AppFixtures extends Fixture
         $manager->flush();
 
 
+        $vit = new Uzivatel();
+        $vit->setUsername("vit");
+        $vit->setJmeno("Vitezslav");
+        $vit->setPrijmeni("Rous");
+        $vit->setPassword($this->encoder->encodePassword($vit, 'heslo01'));
+        $vit->setDatumNarozeni(new \DateTime("1977-11-07"));
+
+        $manager->persist($vit);
+        $manager->flush();
+
+
+        $zdislav = new Uzivatel();
+        $zdislav->setUsername("zdislav");
+        $zdislav->setJmeno("Zdislav");
+        $zdislav->setPrijmeni("Rous");
+        $zdislav->setPassword($this->encoder->encodePassword($zdislav, 'heslo01'));
+        $zdislav->setDatumNarozeni(new \DateTime("1967-11-07"));
+
+        $manager->persist($zdislav);
+        $manager->flush();
+
+
+        $jakub = new Uzivatel();
+        $jakub->setUsername("jakub");
+        $jakub->setJmeno("Jakub");
+        $jakub->setPrijmeni("Vlček");
+        $jakub->setPassword($this->encoder->encodePassword($jakub, 'heslo01'));
+        $jakub->setDatumNarozeni(new \DateTime("1998-10-07"));
+
+        $manager->persist($jakub);
+        $manager->flush();
+
+
+        $patrik = new Uzivatel();
+        $patrik->setUsername("patrik");
+        $patrik->setJmeno("Patrik");
+        $patrik->setPrijmeni("Šafář");
+        $patrik->setPassword($this->encoder->encodePassword($patrik, 'heslo01'));
+        $patrik->setDatumNarozeni(new \DateTime("1990-06-17"));
+
+        $manager->persist($patrik);
+        $manager->flush();
+
+
+        $martin = new Uzivatel();
+        $martin->setUsername("martin");
+        $martin->setJmeno("Martin");
+        $martin->setPrijmeni("Vlček");
+        $martin->setPassword($this->encoder->encodePassword($martin, 'heslo01'));
+        $martin->setDatumNarozeni(new \DateTime("1998-10-07"));
+
+        $manager->persist($martin);
+        $manager->flush();
+
+
+        $milan = new Uzivatel();
+        $milan->setUsername("milan");
+        $milan->setJmeno("Milan");
+        $milan->setPrijmeni("Vlček");
+        $milan->setPassword($this->encoder->encodePassword($milan, 'heslo01'));
+        $milan->setDatumNarozeni(new \DateTime("1996-06-17"));
+
+        $manager->persist($milan);
+        $manager->flush();
+
+        $karel = new Uzivatel();
+        $karel->setUsername("karel");
+        $karel->setJmeno("Karel");
+        $karel->setPrijmeni("Starý");
+        $karel->setPassword($this->encoder->encodePassword($karel, 'heslo01'));
+        $karel->setDatumNarozeni(new \DateTime("1992-06-17"));
+
+        $manager->persist($karel);
+        $manager->flush();
+
+        $zdenek = new Uzivatel();
+        $zdenek->setUsername("zdenek");
+        $zdenek->setJmeno("Zdeněk");
+        $zdenek->setPrijmeni("Mazánek");
+        $zdenek->setPassword($this->encoder->encodePassword($zdenek, 'heslo01'));
+        $zdenek->setDatumNarozeni(new \DateTime("1992-06-17"));
+
+        $manager->persist($zdenek);
+        $manager->flush();
 
 //Tymy
         //1v1
@@ -411,7 +495,166 @@ class AppFixtures extends Fixture
         $manager->persist($turnaj);
         $manager->flush();
 
+        //plne turnaje - test        
 
+        $Turnaj1Tymy =array();
+
+        
+        $napajedla = new Tym();
+        $napajedla->setJmeno("TJ Sokol Napajedla");
+        $napajedla->setAdresa("Nad Kaplí 673, Napajedla");
+        $napajedla->setPopis("");
+        $napajedla->setTyp($typ3);
+        
+        $napajedla->setVedouci($rozhodci);
+        $napajedla->addUzivatele($rozhodci);
+        $napajedla->addUzivatele($slavek);
+        $napajedla->addUzivatele($mirek);
+
+        $manager->persist($napajedla);
+        $manager->flush();
+        $Turnaj1Tymy[0] = $napajedla;
+
+
+        $bystrice = new Tym();
+        $bystrice->setJmeno("SK Bistřice nad Pernštejnem");
+        $bystrice->setAdresa("U Radnice 673,BistriceNadPernstejnem");
+        $bystrice->setPopis("");
+        
+        $bystrice->setVedouci($uzivatel1);
+        $bystrice->addUzivatele($uzivatel);
+        $bystrice->addUzivatele($uzivatel1);
+        $bystrice->addUzivatele($franta);
+
+        $bystrice->setTyp($typ3);
+
+        $manager->persist($bystrice);
+        $manager->flush();
+        $Turnaj1Tymy[1] = $bystrice;
+
+
+        $olesnice  = new Tym();
+        $olesnice->setJmeno("TJ Olesnice");
+        $olesnice->setAdresa("U kostela 7, Olesnice");
+        $olesnice->setPopis("");
+        
+        $olesnice->setVedouci($pepa);
+        $olesnice->addUzivatele($pepa);
+        $olesnice->addUzivatele($petr);
+        $olesnice->addUzivatele($marie);
+
+        $olesnice->setTyp($typ3);
+
+        $manager->persist($olesnice);
+        $manager->flush();
+        $Turnaj1Tymy[2] = $olesnice;
+
+
+        $tasov  = new Tym();
+        $tasov->setJmeno("TJ Spartak Tasov");
+        $tasov->setAdresa("Tasov 40");
+        $tasov->setPopis("");
+        
+        $tasov->setVedouci($jiri);
+        $tasov->addUzivatele($jiri);
+        $tasov->addUzivatele($vaclav);
+        $tasov->addUzivatele($eva);
+
+        $tasov->setTyp($typ3);
+
+        $manager->persist($tasov);
+        $manager->flush();
+        $Turnaj1Tymy[3] = $tasov;
+
+
+        $humpolec = new Tym();
+        $humpolec->setJmeno("Slovan Humpolec");
+        $humpolec->setAdresa("Namesti 40, Humpolec");
+        $humpolec->setPopis("popis tymu");
+        
+        $humpolec->setVedouci($lucie);
+        $humpolec->addUzivatele($lucie);
+        $humpolec->addUzivatele($hana);
+        $humpolec->addUzivatele($tomas);
+
+        $humpolec->setTyp($typ3);
+
+        $manager->persist($humpolec);
+        $manager->flush();
+        $Turnaj1Tymy[4] = $humpolec;
+
+
+        $jinosov = new Tym();
+        $jinosov->setJmeno("Slavoj Jinošov");
+        $jinosov->setAdresa("Jinošov 72");
+        $jinosov->setPopis("");
+        
+        $jinosov->setVedouci($mirek);
+        $jinosov->addUzivatele($mirek);
+        $jinosov->addUzivatele($vit);
+        $jinosov->addUzivatele($zdislav);
+
+        $jinosov->setTyp($typ3);
+
+        $manager->persist($jinosov);
+        $manager->flush();
+        $Turnaj1Tymy[5] = $jinosov;
+
+
+        $jachymov = new Tym();
+        $jachymov->setJmeno("TJ Jáchymov");
+        $jachymov->setAdresa("Jáchymov 72");
+        $jachymov->setPopis("");
+        
+        $jachymov->setVedouci($jakub);
+        $jachymov->addUzivatele($jakub);
+        $jachymov->addUzivatele($martin);
+        $jachymov->addUzivatele($milan);
+
+        $jachymov->setTyp($typ3);
+
+        $manager->persist($jachymov);
+        $manager->flush();
+        $Turnaj1Tymy[6] = $jachymov;
+
+
+        $kosikov = new Tym();
+        $kosikov->setJmeno("TJ Tatran Košíkov");
+        $kosikov->setAdresa("Košíkov 2");
+        $kosikov->setPopis("");
+        
+        $kosikov->setVedouci($patrik);
+        $kosikov->addUzivatele($patrik);
+        $kosikov->addUzivatele($karel);
+        $kosikov->addUzivatele($zdenek);
+
+        $kosikov->setTyp($typ3);
+
+        $manager->persist($kosikov);
+        $manager->flush();
+        $Turnaj1Tymy[7] = $kosikov;
+
+
+
+        $turnaj = new Turnaj();
+        $turnaj->setNazev("Memoriál T. G. Masaryka");
+        $turnaj->setAdresa("Napajedla, sokolovna");
+        $turnaj->setPopis("Zveme vás na turnaj v basketballu pro tří až pětičlenné týmy, který se uskuteční 1. 6. 2019 v Sokolovně v Napajedlech");
+        $turnaj->setVedouci($slavek);
+        $turnaj->setTyp($typ3);
+        $turnaj->addRozhodci($slavek);
+        $turnaj->addRozhodci($rozhodci);
+        $turnaj->setDatum(new \DateTime("2019-06-01"));
+        $turnaj->setpocetTymu(8);
+
+        for ($x = 0; $x < 8; $x++) {
+            $turnaj->addTymy($Turnaj1Tymy[$x]);
+        }
+
+        $manager->persist($turnaj);
+        $manager->flush();
+        
+        
 
     }
 }
