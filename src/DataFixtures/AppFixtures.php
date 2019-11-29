@@ -80,6 +80,17 @@ class AppFixtures extends Fixture
         $manager->persist($pepa);
         $manager->flush();
 
+        $rozhodci = new Uzivatel();
+        $rozhodci->setUsername("rozhodci");
+        $rozhodci->setJmeno("Marek");
+        $rozhodci->setPrijmeni("Briza");
+        $rozhodci->setPassword($this->encoder->encodePassword($rozhodci, 'heslo01'));
+        $rozhodci->setDatumNarozeni(new \DateTime("1980-09-12"));
+        $rozhodci->setJeRozhodci(1);
+
+        $manager->persist($rozhodci);
+        $manager->flush();
+
         $slavek = new Uzivatel();
         $slavek->setUsername("slavek");
         $slavek->setJmeno("Jaroslav");
@@ -364,6 +375,7 @@ class AppFixtures extends Fixture
         $turnaj->setVedouci($uzivatel);
         $turnaj->setTyp($typ1);
         $turnaj->addRozhodci($slavek);
+        $turnaj->addRozhodci($rozhodci);
         $turnaj->setDatum(new \DateTime("2019-06-01"));
         $turnaj->setpocetTymu(4);
 

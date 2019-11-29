@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2"/>
+    <title>Projekt IIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
+     podle použitého editoru -->
+
+<h1>Sport: správa turnajů, registrace hráčů a zadávání výsledků</h1> <!-- Nahradte názvem svého zadání -->
+
+<dl>
+	<dt>Autoři</dt>
+	<dd>Tomáš Zálešák 
+	    <a href="mailto:xzales13@stud.fit.vutbr.cz">xzales13@stud.fit.vutbr.cz</a> -
+		popis činnosti v týmu
+	</dd>
+	<dd>Jan Sladký
+	    <a href="mailto:xsladk09@stud.fit.vutbr.cz">xsladk09@stud.fit.vutbr.cz</a> - 
+		popis činnosti v týmu
+	</dd>
+  <dd>David Ševčík
+	    <a href="mailto:xsevci62@stud.fit.vutbr.cz">xsevci62@stud.fit.vutbr.cz</a> - 
+		popis činnosti v týmu
+	</dd>
+	<dt>URL aplikace</dt>
+	<dd><a href="http://www.stud.fit.vutbr.cz/~xzales13/IIS/public/index.php">http://www.stud.fit.vutbr.cz/~xzales13/IIS/public/index.php</a></dd>
+	<dd>(pokud má aplikace více vstupních stránek, napište obdobně další URL)</dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+<table>
+<tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin</td><td>admin</td><td>Administrátor</td></tr>
+<tr><td>rozhodci</td><td>heslo01</td><td>Rozhodčí</td></tr>
+<tr><td>pepa</td><td>heslo01</td><td>Hráč</td></tr>
+</table>
+
+<p>(Diagram případů užití není nutné vkládat, pokud IS implementuje role a případy užití definované zadáním.)</p> 
+
+<h2>Implementace</h2>
+<p>Stručná dokumentace k implementaci, která popisuje, které části projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
+
+<h3>Databáze</h3>
+
+
+<svg viewBox="69 -4 1205 708" width="1136px" height="712px" xmlns="http://www.w3.org/2000/svg" version="1.1">
+	<line x1="312" y1="215" x2="322" y2="215" style="stroke:#333;stroke-width:1;"/>
+	<line x1="453" y1="349" x2="463" y2="349" style="stroke:#333;stroke-width:1;"/>
+	<line x1="322" y1="215" x2="453" y2="349" style="stroke:#333;stroke-width:1;"/>
+	<line x1="319.5" y1="215" x2="315.96446609407" y2="218.53553390593" style="stroke:#333;stroke-width:2;"/>
+	<line x1="319.5" y1="215" x2="315.96446609407" y2="211.46446609407" style="stroke:#333;stroke-width:2;"/>
+	<line x1="458" y1="349" x2="454.46446609407" y2="352.53553390593" style="stroke:#333;stroke-width:2;"/>
+	<line x1="458" y1="349" x2="454.46446609407" y2="345.46446609407" style="stroke:#333;stroke-width:2;"/>
+	<line x1="312" y1="235" x2="322" y2="235" style="stroke:#cb0;stroke-width:1;"/>
+	<line x1="1030" y1="203" x2="1040" y2="203" style="stroke:#cb0;stroke-width:1;"/>
+	<line x1="322" y1="235" x2="1030" y2="203" style="stroke:#cb0;stroke-width:1;"/>
+	<line x1="319.5" y1="235" x2="315.96446609407" y2="238.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="319.5" y1="235" x2="315.96446609407" y2="231.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="1035" y1="203" x2="1031.4644660941" y2="206.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="1035" y1="203" x2="1031.4644660941" y2="199.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="165" y1="450" x2="175" y2="450" style="stroke:#bbb;stroke-width:1;"/>
+	<line x1="418" y1="583" x2="428" y2="583" style="stroke:#bbb;stroke-width:1;"/>
+	<line x1="175" y1="450" x2="418" y2="583" style="stroke:#bbb;stroke-width:1;"/>
+	<line x1="172.5" y1="450" x2="168.96446609407" y2="453.53553390593" style="stroke:#bbb;stroke-width:2;"/>
+	<line x1="172.5" y1="450" x2="168.96446609407" y2="446.46446609407" style="stroke:#bbb;stroke-width:2;"/>
+	<line x1="423" y1="583" x2="419.46446609407" y2="586.53553390593" style="stroke:#bbb;stroke-width:2;"/>
+	<line x1="423" y1="583" x2="419.46446609407" y2="579.46446609407" style="stroke:#bbb;stroke-width:2;"/>
+	<line x1="165" y1="430" x2="175" y2="430" style="stroke:#bbb;stroke-width:1;"/>
+	<line x1="213" y1="195" x2="223" y2="195" style="stroke:#bbb;stroke-width:1;"/>
+	<line x1="175" y1="430" x2="213" y2="195" style="stroke:#bbb;stroke-width:1;"/>
+	<line x1="172.5" y1="430" x2="168.96446609407" y2="433.53553390593" style="stroke:#bbb;stroke-width:2;"/>
+	<line x1="172.5" y1="430" x2="168.96446609407" y2="426.46446609407" style="stroke:#bbb;stroke-width:2;"/>
+	<line x1="218" y1="195" x2="214.46446609407" y2="198.53553390593" style="stroke:#bbb;stroke-width:2;"/>
+	<line x1="218" y1="195" x2="214.46446609407" y2="191.46446609407" style="stroke:#bbb;stroke-width:2;"/>
+	<line x1="312" y1="41" x2="302" y2="41" style="stroke:#333;stroke-width:1;"/>
+	<line x1="322" y1="195" x2="312" y2="195" style="stroke:#333;stroke-width:1;"/>
+	<line x1="302" y1="41" x2="322" y2="195" style="stroke:#333;stroke-width:1;"/>
+	<line x1="304.5" y1="41" x2="308.03553390593" y2="44.535533905933" style="stroke:#333;stroke-width:2;"/>
+	<line x1="304.5" y1="41" x2="308.03553390593" y2="37.464466094067" style="stroke:#333;stroke-width:2;"/>
+	<line x1="317" y1="195" x2="320.53553390593" y2="198.53553390593" style="stroke:#333;stroke-width:2;"/>
+	<line x1="317" y1="195" x2="320.53553390593" y2="191.46446609407" style="stroke:#333;stroke-width:2;"/>
+	<line x1="422" y1="61" x2="432" y2="61" style="stroke:#333;stroke-width:1;"/>
+	<line x1="1030" y1="203" x2="1040" y2="203" style="stroke:#333;stroke-width:1;"/>
+	<line x1="432" y1="61" x2="1030" y2="203" style="stroke:#333;stroke-width:1;"/>
+	<line x1="429.5" y1="61" x2="425.96446609407" y2="64.535533905933" style="stroke:#333;stroke-width:2;"/>
+	<line x1="429.5" y1="61" x2="425.96446609407" y2="57.464466094067" style="stroke:#333;stroke-width:2;"/>
+	<line x1="1035" y1="203" x2="1031.4644660941" y2="206.53553390593" style="stroke:#333;stroke-width:2;"/>
+	<line x1="1035" y1="203" x2="1031.4644660941" y2="199.46446609407" style="stroke:#333;stroke-width:2;"/>
+	<line x1="428" y1="603" x2="418" y2="603" style="stroke:#cb0;stroke-width:1;"/>
+	<line x1="453" y1="349" x2="463" y2="349" style="stroke:#cb0;stroke-width:1;"/>
+	<line x1="418" y1="603" x2="453" y2="349" style="stroke:#cb0;stroke-width:1;"/>
+	<line x1="420.5" y1="603" x2="424.03553390593" y2="606.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="420.5" y1="603" x2="424.03553390593" y2="599.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="458" y1="349" x2="454.46446609407" y2="352.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="458" y1="349" x2="454.46446609407" y2="345.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="510" y1="623" x2="520" y2="623" style="stroke:#0b0;stroke-width:1;"/>
+	<line x1="1030" y1="203" x2="1040" y2="203" style="stroke:#0b0;stroke-width:1;"/>
+	<line x1="520" y1="623" x2="1030" y2="203" style="stroke:#0b0;stroke-width:1;"/>
+	<line x1="517.5" y1="623" x2="513.96446609407" y2="626.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+	<line x1="517.5" y1="623" x2="513.96446609407" y2="619.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+	<line x1="1035" y1="203" x2="1031.4644660941" y2="206.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+	<line x1="1035" y1="203" x2="1031.4644660941" y2="199.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+	<line x1="714" y1="276" x2="704" y2="276" style="stroke:#0b0;stroke-width:1;"/>
+	<line x1="520" y1="583" x2="510" y2="583" style="stroke:#0b0;stroke-width:1;"/>
+	<line x1="704" y1="276" x2="520" y2="583" style="stroke:#0b0;stroke-width:1;"/>
+	<line x1="706.5" y1="276" x2="710.03553390593" y2="279.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+	<line x1="706.5" y1="276" x2="710.03553390593" y2="272.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+	<line x1="515" y1="583" x2="518.53553390593" y2="586.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+	<line x1="515" y1="583" x2="518.53553390593" y2="579.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+	<line x1="810" y1="296" x2="820" y2="296" style="stroke:#cb0;stroke-width:1;"/>
+	<line x1="1030" y1="203" x2="1040" y2="203" style="stroke:#cb0;stroke-width:1;"/>
+	<line x1="820" y1="296" x2="1030" y2="203" style="stroke:#cb0;stroke-width:1;"/>
+	<line x1="817.5" y1="296" x2="813.96446609407" y2="299.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="817.5" y1="296" x2="813.96446609407" y2="292.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="1035" y1="203" x2="1031.4644660941" y2="206.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="1035" y1="203" x2="1031.4644660941" y2="199.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="784" y1="631" x2="774" y2="631" style="stroke:#0b0;stroke-width:1;"/>
+	<line x1="520" y1="583" x2="510" y2="583" style="stroke:#0b0;stroke-width:1;"/>
+	<line x1="774" y1="631" x2="520" y2="583" style="stroke:#0b0;stroke-width:1;"/>
+	<line x1="776.5" y1="631" x2="780.03553390593" y2="634.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+	<line x1="776.5" y1="631" x2="780.03553390593" y2="627.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+	<line x1="515" y1="583" x2="518.53553390593" y2="586.53553390593" style="stroke:#0b0;stroke-width:2;"/>
+	<line x1="515" y1="583" x2="518.53553390593" y2="579.46446609407" style="stroke:#0b0;stroke-width:2;"/>
+	<line x1="784" y1="611" x2="774" y2="611" style="stroke:#cb0;stroke-width:1;"/>
+	<line x1="520" y1="583" x2="510" y2="583" style="stroke:#cb0;stroke-width:1;"/>
+	<line x1="774" y1="611" x2="520" y2="583" style="stroke:#cb0;stroke-width:1;"/>
+	<line x1="776.5" y1="611" x2="780.03553390593" y2="614.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="776.5" y1="611" x2="780.03553390593" y2="607.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="515" y1="583" x2="518.53553390593" y2="586.53553390593" style="stroke:#cb0;stroke-width:2;"/>
+	<line x1="515" y1="583" x2="518.53553390593" y2="579.46446609407" style="stroke:#cb0;stroke-width:2;"/>
+	
+	
+	<rect width="89" height="20" x="223" y="165" style="fill:#007;stroke:black;"/>
+	<text width="89" height="20" x="228" y="179" style="fill:#fff;" font-family="Arial" font-size="16px"> turnaj</text>
+	<rect width="89" height="20" x="223" y="185" style="fill:#aea;stroke:black;"/>
+	<text width="89" height="20" x="228" y="199" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+	<rect width="89" height="20" x="223" y="205" style="fill:none;stroke:black;"/>
+	<text width="89" height="20" x="228" y="219" style="fill:black;" font-family="Arial" font-size="16px">typ_id</text>
+	<rect width="89" height="20" x="223" y="225" style="fill:none;stroke:black;"/>
+	<text width="89" height="20" x="228" y="239" style="fill:black;" font-family="Arial" font-size="16px">vedouci_id</text>
+	<rect width="89" height="20" x="223" y="245" style="fill:none;stroke:black;"/>
+	<text width="89" height="20" x="228" y="259" style="fill:black;" font-family="Arial" font-size="16px">nazev</text>
+	<rect width="89" height="20" x="223" y="265" style="fill:none;stroke:black;"/>
+	<text width="89" height="20" x="228" y="279" style="fill:black;" font-family="Arial" font-size="16px">adresa</text>
+	<rect width="89" height="20" x="223" y="285" style="fill:none;stroke:black;"/>
+	<text width="89" height="20" x="228" y="299" style="fill:black;" font-family="Arial" font-size="16px">datum</text>
+	<rect width="89" height="20" x="223" y="305" style="fill:none;stroke:black;"/>
+	<text width="89" height="20" x="228" y="319" style="fill:black;" font-family="Arial" font-size="16px">pocet_tymu</text>
+	<rect width="89" height="20" x="223" y="325" style="fill:none;stroke:black;"/>
+	<text width="89" height="20" x="228" y="339" style="fill:black;" font-family="Arial" font-size="16px">popis</text>
+	<rect width="81" height="20" x="84" y="400" style="fill:#007;stroke:black;"/>
+	<text width="81" height="20" x="89" y="414" style="fill:#fff;" font-family="Arial" font-size="16px"> turnaj_tym</text>
+	<rect width="81" height="20" x="84" y="420" style="fill:#aea;stroke:black;"/>
+	<text width="81" height="20" x="89" y="434" style="fill:black;" font-family="Arial" font-size="16px">turnaj_id</text>
+	<rect width="81" height="20" x="84" y="440" style="fill:#aea;stroke:black;"/>
+	<text width="81" height="20" x="89" y="454" style="fill:black;" font-family="Arial" font-size="16px">tym_id</text>
+	<rect width="110" height="20" x="312" y="11" style="fill:#007;stroke:black;"/>
+	<text width="110" height="20" x="317" y="25" style="fill:#fff;" font-family="Arial" font-size="16px"> turnaj_uzivatel</text>
+	<rect width="110" height="20" x="312" y="31" style="fill:#aea;stroke:black;"/>
+	<text width="110" height="20" x="317" y="45" style="fill:black;" font-family="Arial" font-size="16px">turnaj_id</text>
+	<rect width="110" height="20" x="312" y="51" style="fill:#aea;stroke:black;"/>
+	<text width="110" height="20" x="317" y="65" style="fill:black;" font-family="Arial" font-size="16px">uzivatel_id</text>
+	<rect width="82" height="20" x="428" y="553" style="fill:#007;stroke:black;"/>
+	<text width="82" height="20" x="433" y="567" style="fill:#fff;" font-family="Arial" font-size="16px"> tym</text>
+	<rect width="82" height="20" x="428" y="573" style="fill:#aea;stroke:black;"/>
+	<text width="82" height="20" x="433" y="587" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+	<rect width="82" height="20" x="428" y="593" style="fill:none;stroke:black;"/>
+	<text width="82" height="20" x="433" y="607" style="fill:black;" font-family="Arial" font-size="16px">typ_id</text>
+	<rect width="82" height="20" x="428" y="613" style="fill:none;stroke:black;"/>
+	<text width="82" height="20" x="433" y="627" style="fill:black;" font-family="Arial" font-size="16px">vedouci_id</text>
+	<rect width="82" height="20" x="428" y="633" style="fill:none;stroke:black;"/>
+	<text width="82" height="20" x="433" y="647" style="fill:black;" font-family="Arial" font-size="16px">jmeno</text>
+	<rect width="82" height="20" x="428" y="653" style="fill:none;stroke:black;"/>
+	<text width="82" height="20" x="433" y="667" style="fill:black;" font-family="Arial" font-size="16px">popis</text>
+	<rect width="82" height="20" x="428" y="673" style="fill:none;stroke:black;"/>
+	<text width="82" height="20" x="433" y="687" style="fill:black;" font-family="Arial" font-size="16px">adresa</text>
+	<rect width="96" height="20" x="714" y="246" style="fill:#007;stroke:black;"/>
+	<text width="96" height="20" x="719" y="260" style="fill:#fff;" font-family="Arial" font-size="16px"> tym_uzivatel</text>
+	<rect width="96" height="20" x="714" y="266" style="fill:#aea;stroke:black;"/>
+	<text width="96" height="20" x="719" y="280" style="fill:black;" font-family="Arial" font-size="16px">tym_id</text>
+	<rect width="96" height="20" x="714" y="286" style="fill:#aea;stroke:black;"/>
+	<text width="96" height="20" x="719" y="300" style="fill:black;" font-family="Arial" font-size="16px">uzivatel_id</text>
+	<rect width="132" height="20" x="463" y="319" style="fill:#007;stroke:black;"/>
+	<text width="132" height="20" x="468" y="333" style="fill:#fff;" font-family="Arial" font-size="16px"> typ</text>
+	<rect width="132" height="20" x="463" y="339" style="fill:#aea;stroke:black;"/>
+	<text width="132" height="20" x="468" y="353" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+	<rect width="132" height="20" x="463" y="359" style="fill:none;stroke:black;"/>
+	<text width="132" height="20" x="468" y="373" style="fill:black;" font-family="Arial" font-size="16px">nazev</text>
+	<rect width="132" height="20" x="463" y="379" style="fill:none;stroke:black;"/>
+	<text width="132" height="20" x="468" y="393" style="fill:black;" font-family="Arial" font-size="16px">pocet_clenu_tymu</text>
+	<rect width="79" height="20" x="784" y="561" style="fill:#007;stroke:black;"/>
+	<text width="79" height="20" x="789" y="575" style="fill:#fff;" font-family="Arial" font-size="16px"> utkani</text>
+	<rect width="79" height="20" x="784" y="581" style="fill:#aea;stroke:black;"/>
+	<text width="79" height="20" x="789" y="595" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+	<rect width="79" height="20" x="784" y="601" style="fill:none;stroke:black;"/>
+	<text width="79" height="20" x="789" y="615" style="fill:black;" font-family="Arial" font-size="16px">hoste_id</text>
+	<rect width="79" height="20" x="784" y="621" style="fill:none;stroke:black;"/>
+	<text width="79" height="20" x="789" y="635" style="fill:black;" font-family="Arial" font-size="16px">domaci_id</text>
+	<rect width="121" height="20" x="1040" y="173" style="fill:#007;stroke:black;"/>
+	<text width="121" height="20" x="1045" y="187" style="fill:#fff;" font-family="Arial" font-size="16px"> uzivatel</text>
+	<rect width="121" height="20" x="1040" y="193" style="fill:#aea;stroke:black;"/>
+	<text width="121" height="20" x="1045" y="207" style="fill:black;" font-family="Arial" font-size="16px">id</text>
+	<rect width="121" height="20" x="1040" y="213" style="fill:none;stroke:black;"/>
+	<text width="121" height="20" x="1045" y="227" style="fill:black;" font-family="Arial" font-size="16px">username</text>
+	<rect width="121" height="20" x="1040" y="233" style="fill:none;stroke:black;"/>
+	<text width="121" height="20" x="1045" y="247" style="fill:black;" font-family="Arial" font-size="16px">roles</text>
+	<rect width="121" height="20" x="1040" y="253" style="fill:none;stroke:black;"/>
+	<text width="121" height="20" x="1045" y="267" style="fill:black;" font-family="Arial" font-size="16px">password</text>
+	<rect width="121" height="20" x="1040" y="273" style="fill:none;stroke:black;"/>
+	<text width="121" height="20" x="1045" y="287" style="fill:black;" font-family="Arial" font-size="16px">jmeno</text>
+	<rect width="121" height="20" x="1040" y="293" style="fill:none;stroke:black;"/>
+	<text width="121" height="20" x="1045" y="307" style="fill:black;" font-family="Arial" font-size="16px">prijmeni</text>
+	<rect width="121" height="20" x="1040" y="313" style="fill:none;stroke:black;"/>
+	<text width="121" height="20" x="1045" y="327" style="fill:black;" font-family="Arial" font-size="16px">datum_narozeni</text>
+	<rect width="121" height="20" x="1040" y="333" style="fill:none;stroke:black;"/>
+	<text width="121" height="20" x="1045" y="347" style="fill:black;" font-family="Arial" font-size="16px">je_rozhodci</text>
+ </svg>
+
+
+
+<h2>Instalace</h2>
+
+Stručně popište: 
+<ul>
+<li>postup instalace na server,</li>
+<li>softwarové požadavky (verze PHP apod.),</li>
+<li>jak rozbalit, konfigurovat, inicializovat databázi, ...</li>
+</ul>
+
+<h3 id="postupnasazennaevu">Postup nasazení na server eva.fit.vutbr.cz</h3>
+
+<pre><code>ssh eva
+cd ~/WWW
+git clone git@github.com:tomaszalesak/IIS.git
+cd IIS
+php72 -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php72 composer-setup.php
+php72 -r "unlink('composer-setup.php');"
+php72 composer.phar install
+</code></pre>
+
+<p> <b>  V .env je potřeba zvolit databázi na evě. </b></p>
+
+<pre><code>php72 bin/console doctrine:migrations:migrate
+chmod -R 755 ~/WWW/.*
+</code></pre>
+
+<h3>Softwarové požadavky</h3>
+<ul>
+	<li>php 7.2</li>
+	<li>MySQL</li>
+	<li>Composer</li>
+</ul>
+
+<h2>Známé problémy</h2>
+<p>Zde popište, které body zadání nejsou implementovány a z jakého důvodu. Např. &bdquo;Z časových důvodů nebyla implementována správa uživatelů.&rdquo; Pomůžete tím zrychlit hodnocení, když neimplementované funkce nebudeme muset dlouze hledat.</p>
+
+</body>
+</html>
