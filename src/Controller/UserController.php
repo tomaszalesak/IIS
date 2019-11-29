@@ -112,6 +112,7 @@ class UserController extends AbstractController
         $tym = $em->getRepository(Tym::class)->find($id);
         if($tym->getTyp()->getPocetClenuTymu() - $tym->getUzivatele()->count() != 0) {
             $tym->addUzivatele($this->getUser());
+            $em->persist($tym);
             $em->flush();
             $this->addFlash('success', 'Byl jsi přidán');
 

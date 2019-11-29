@@ -69,6 +69,11 @@ class Tym
      */
     private $utkani_domaci;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Utkani", mappedBy="vyherce")
+     */
+    private $vyherni_utkani;
+
 
     public function __construct()
     {
@@ -76,6 +81,7 @@ class Tym
         $this->turnaje = new ArrayCollection();
         $this->utkani_hoste = new ArrayCollection();
         $this->utkani_domaci = new ArrayCollection();
+        $this->vyherni_utkani = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -253,6 +259,37 @@ class Tym
             // set the owning side to null (unless already changed)
             if ($utkaniDomaci->getDomaci() === $this) {
                 $utkaniDomaci->setDomaci(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Utkani[]
+     */
+    public function getVyherniUtkani(): Collection
+    {
+        return $this->vyherni_utkani;
+    }
+
+    public function addVyherniUtkani(Utkani $vyherniUtkani): self
+    {
+        if (!$this->vyherni_utkani->contains($vyherniUtkani)) {
+            $this->vyherni_utkani[] = $vyherniUtkani;
+            $vyherniUtkani->setVyherce($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVyherniUtkani(Utkani $vyherniUtkani): self
+    {
+        if ($this->vyherni_utkani->contains($vyherniUtkani)) {
+            $this->vyherni_utkani->removeElement($vyherniUtkani);
+            // set the owning side to null (unless already changed)
+            if ($vyherniUtkani->getVyherce() === $this) {
+                $vyherniUtkani->setVyherce(null);
             }
         }
 

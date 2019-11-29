@@ -5,15 +5,13 @@
         <div class="row justify-content-center">
             <div class="col">
                 <h1>Úprava turnaje</h1>
-
                 {{ form_start(turnajForm) }}
 
                 {{ form_row(turnajForm.nazev ) }}
                 {{ form_row(turnajForm.popis ) }}
                 {{ form_row(turnajForm.adresa ) }}
                 {{ form_row(turnajForm.datum) }}
-                {{ form_row(turnajForm.minimum_tymu) }}
-                {{ form_row(turnajForm.maximum_tymu) }}
+                {{ form_row(turnajForm.pocet_tymu) }}
                 {{ form_row(turnajForm.typ) }}
                 <button class="btn btn-primary">Upravit turnaj </button>
 

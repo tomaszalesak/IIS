@@ -72,12 +72,18 @@ class Turnaj
      */
     private $rozhodci;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Utkani", mappedBy="turnaj")
+     */
+    private $utkani;
+
 
 
     public function __construct()
     {
         $this->tymy = new ArrayCollection();
         $this->rozhodci = new ArrayCollection();
+        $this->utkani = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -217,6 +223,37 @@ class Turnaj
     {
         if ($this->rozhodci->contains($rozhodci)) {
             $this->rozhodci->removeElement($rozhodci);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Utkani[]
+     */
+    public function getUtkani(): Collection
+    {
+        return $this->utkani;
+    }
+
+    public function addUtkani(Utkani $utkani): self
+    {
+        if (!$this->utkani->contains($utkani)) {
+            $this->utkani[] = $utkani;
+            $utkani->setTurnaj($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUtkani(Utkani $utkani): self
+    {
+        if ($this->utkani->contains($utkani)) {
+            $this->utkani->removeElement($utkani);
+            // set the owning side to null (unless already changed)
+            if ($utkani->getTurnaj() === $this) {
+                $utkani->setTurnaj(null);
+            }
         }
 
         return $this;

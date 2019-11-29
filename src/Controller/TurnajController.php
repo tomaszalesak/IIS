@@ -99,8 +99,11 @@ class TurnajController extends AbstractController
             );
         }
 
+        $pocet_kol = floor(log($turnaj->getPocetTymu(),2));
+
         return $this->render('turnaj/turnaj_detail.html.twig', [
-            'turnaj' => $turnaj
+            'turnaj' => $turnaj,
+            'pocet_kol' => $pocet_kol
         ]);
     }
 
@@ -145,6 +148,7 @@ class TurnajController extends AbstractController
 
         if(($turnaj->getTyp() == $tym->getTyp()) and $this->getUser() == $tym->getVedouci() and $err == 0){
             $turnaj->addTymy($tym);
+            $em->persist($turnaj);
             $em->flush();
             $this->addFlash('success', 'Tým byl přidán');
         }else
@@ -175,6 +179,7 @@ class TurnajController extends AbstractController
             $this->addFlash('err', 'Nemůžeš se zapsat jako rozhodčí pokud, jsi v nějakém týmu na turnaji');
         else{
             $turnaj->addRozhodci($this->getUser());
+            $em->persist($turnaj);
             $em->flush();
             $this->addFlash('success', 'Byl jsi přidán jako rozhodčí');
         }
