@@ -1,3 +1,6 @@
+
+https://docs.google.com/document/d/1GqR9iUAZ6TtV8hgta3HR0JYFOm9lah37QR4Nygv1xM4/edit
+
 # IIS
 
 IIS: Sport: správa turnajů, registrace hráčů a zadávání výsledků
