@@ -1,0 +1,25 @@
+<table class="table table-sm">
+    <thead>
+    <tr>
+        <th scope="col">Jméno</th>
+        <th scope="col">MIN</th>
+        <th scope="col">2B</th>
+        <th scope="col">3B</th>
+        <th scope="col">TH</th>
+        <th scope="col">B</th>
+    </tr>
+    </thead>
+    <tbody>
+
+{% for uzivatel in uzivatele %}
+        <tr>
+            <th scope="col">{{ uzivatel.jmeno }} {{ uzivatel.prijmeni }}</th>
+            <td scope="col"></td>
+            <td scope="col"></td>
+            <td scope="col"></td>
+            <td scope="col"></td>
+            <td scope="col"></td>
+        </tr>
+{% endfor %}
+    </tbody>
+</table>

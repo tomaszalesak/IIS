@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+                <h1>Statiska utkání</h1>
+                {{ form_start(utkaniForm) }}
+
+                {{ form_row(utkaniForm.domaci_body ) }}
+                {{ form_row(utkaniForm.hoste_body ) }}
+
+                <button class="btn btn-primary">Zapsat </button>
+
+                {{ form_end(utkaniForm) }}
+            </div>
+        </div>
+        <br>
+        <div class="row ">
+            <div class="col">
+                <h4>Domácí: {{ utkani.domaci.jmeno }}</h4>
+                {% set uzivatele = utkani.domaci.uzivatele %}
+                {{ include('utkani/_statistiky_hracu.html.twig') }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h4>Hoste: {{ utkani.hoste.jmeno }} </h4>
+                {% set uzivatele = utkani.hoste.uzivatele %}
+                {{ include('utkani/_statistiky_hracu.html.twig') }}
+            </div>
+        </div>
+
+        </div>
+
+
+    </div>
+{% endblock %}

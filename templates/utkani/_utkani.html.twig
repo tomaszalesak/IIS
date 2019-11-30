@@ -1,0 +1,30 @@
+<table class="table table-small text-center">
+    <thead>
+    <tr>
+        <th class="align-center" scope="col">Domácí</th>
+        <th scope="col"></th>
+        <th scope="col">Body</th>
+        <th scope="col"></th>
+        <th scope="col">Hosté</th>
+        {% if is_granted('ROLE_USER') and app.user in turnaj.rozhodci  %}
+            <th scope="col">Zápis</th>
+        {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for utk in utkani %}
+        {% if utk.domaci and utk.hoste %}
+            <tr>
+                <th scope="row">{{ utk.domaci? utk.domaci.jmeno : '-'}}</th>
+                <td> {{ utk.domacibody? utk.domacibody : '-'}}</td>
+                <td>:</td>
+                <td scope="row">{{ utk.hostebody? utk.hostebody : '-'}}</td>
+                <th>{{ utk.hoste? utk.hoste.jmeno : '-'}}</th>
+                {% if is_granted('ROLE_USER') and app.user in turnaj.rozhodci  %}
+                    <td scope="row"><a class="btn btn-secondary" href="{{ path('app_ statistiky_utkani',{id: utk.id}) }}" role="submit">Zapsat statistiky</a></td>
+                {% endif %}
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>

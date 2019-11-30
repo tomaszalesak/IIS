@@ -175,9 +175,9 @@
                             {% for utkani in turnaj.utkani %}
                                 {% if utkani.kolo == i %}
                                     <li class="spacer">&nbsp;</li>
-                                    <li class="game game-top ">{{ utkani.domaci? utkani.domaci.jmeno : '-'}}<span>{{ utkani.domacibody? utkani.domacibody : '-'}}</span></li>
+                                    <li class="game game-top {{ utkani.domaci == utkani.vyherce? 'winner' : ''}}">{{ utkani.domaci? utkani.domaci.jmeno : '-'}}<span>{{ utkani.domacibody? utkani.domacibody : '-'}}</span></li>
                                     <li class="game game-spacer">&nbsp;</li>
-                                    <li class="game game-bottom ">{{ utkani.hoste? utkani.hoste.jmeno : '-'}}<span>{{ utkani.hostebody? utkani.hostebody : '-'}}</span></li>
+                                    <li class="game game-bottom {{ utkani.hoste == utkani.vyherce? 'winner' : ''}}">{{ utkani.hoste? utkani.hoste.jmeno : '-'}}<span>{{ utkani.hostebody? utkani.hostebody : '-'}}</span></li>
                                 {% endif %}
                             {% endfor %}
                             <li class="spacer">&nbsp;</li>
@@ -185,6 +185,12 @@
                     {% endfor %}
                 </main>
                 {%  endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                {% set utkani = turnaj.utkani %}
+                {{ include('utkani/_utkani.html.twig') }}
             </div>
         </div>
 
