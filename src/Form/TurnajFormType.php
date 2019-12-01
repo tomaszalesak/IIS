@@ -7,6 +7,7 @@ use App\Entity\Typ;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,7 +25,7 @@ class TurnajFormType extends AbstractType
                 'required' => false
             ])
             ->add('adresa')
-            ->add('datum')
+            ->add('datum',DateType::class,['data' => new \DateTime("now")])
             ->add('pocet_tymu', ChoiceType::class, [
                 'label' => 'Vyber počet týmů *',
                 'choices'  => [

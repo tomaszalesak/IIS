@@ -20,14 +20,14 @@ class StatistikyHrace
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Type(type="integer",message="Hodnota {{ value }} není typu {{ type }}.")
-     * @Assert\GreaterThan(0, message="Hodnota nesmí být záporná")
+     * @Assert\GreaterThan(-1, message="Hodnota nesmí být záporná")
      */
     private $dva_body;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Type(type="integer",message="Hodnota {{ value }} není typu {{ type }}.")
-     * @Assert\GreaterThan(0)
+     * @Assert\GreaterThan(-1, message="Hodnota nesmí být záporná")
      *
      */
     private $tri_body;
@@ -35,7 +35,7 @@ class StatistikyHrace
     /**
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Type(type="integer",message="Hodnota {{ value }} není typu {{ type }}.")
-     * @Assert\GreaterThan(0)
+     * @Assert\GreaterThan(-1, message="Hodnota nesmí být záporná")
      */
     private $fauly;
 
@@ -43,7 +43,7 @@ class StatistikyHrace
      * @ORM\Column(type="integer", nullable=true)
      * @Assert\Expression("value >= (this.getTriBody() *3)  + (this.getDvaBody() *2)",message="Tato hodnota neodpovídá bodům za dva a za tři")
      *  @Assert\Type(type="integer",message="Hodnota {{ value }} není typu {{ type }}.")
-     * @Assert\GreaterThan(0)
+     * @Assert\GreaterThan(-1, message="Hodnota nesmí být záporná")
      */
     private $body;
 
