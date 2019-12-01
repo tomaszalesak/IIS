@@ -77,11 +77,17 @@ class Uzivatel implements UserInterface
      */
     private $piskam_utkani;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\StatistikyHrace", mappedBy="hrac")
+     */
+    private $statistiky;
+
     public function __construct()
     {
         $this->tymy = new ArrayCollection();
         $this->vedouci_tymu = new ArrayCollection();
         $this->piskam_utkani = new ArrayCollection();
+        $this->statistiky = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -318,6 +324,37 @@ class Uzivatel implements UserInterface
         if ($this->piskam_utkani->contains($piskamUtkani)) {
             $this->piskam_utkani->removeElement($piskamUtkani);
             $piskamUtkani->removeRozhodci($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|StatistikyHrace[]
+     */
+    public function getStatistiky(): Collection
+    {
+        return $this->statistiky;
+    }
+
+    public function addStatistiky(StatistikyHrace $statistiky): self
+    {
+        if (!$this->statistiky->contains($statistiky)) {
+            $this->statistiky[] = $statistiky;
+            $statistiky->setHrac($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatistiky(StatistikyHrace $statistiky): self
+    {
+        if ($this->statistiky->contains($statistiky)) {
+            $this->statistiky->removeElement($statistiky);
+            // set the owning side to null (unless already changed)
+            if ($statistiky->getHrac() === $this) {
+                $statistiky->setHrac(null);
+            }
         }
 
         return $this;

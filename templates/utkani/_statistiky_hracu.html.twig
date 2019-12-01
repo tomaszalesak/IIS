@@ -2,10 +2,9 @@
     <thead>
     <tr>
         <th scope="col">Jméno</th>
-        <th scope="col">MIN</th>
         <th scope="col">2B</th>
         <th scope="col">3B</th>
-        <th scope="col">TH</th>
+        <th scope="col">Fauly</th>
         <th scope="col">B</th>
     </tr>
     </thead>
@@ -13,12 +12,26 @@
 
 {% for uzivatel in uzivatele %}
         <tr>
-            <th scope="col">{{ uzivatel.jmeno }} {{ uzivatel.prijmeni }}</th>
-            <td scope="col"></td>
-            <td scope="col"></td>
-            <td scope="col"></td>
-            <td scope="col"></td>
-            <td scope="col"></td>
+            <th scope="col"><a href="{{ path('app_statistiky_hrace_utkani', {id_hrace: uzivatel.id ,id_utkani: utkani.id }) }}">{{ uzivatel.jmeno }} {{ uzivatel.prijmeni }}</a></th>
+            {% set zapsano = 0 %}
+            {% for statistika in uzivatel.statistiky %}
+                {% if statistika.utkani == utkani %}
+                    {%  set zapsano = 1 %}
+                    <td scope="col">{{ statistika.dvabody}}</td>
+                    <td scope="col">{{statistika.tribody}}</td>
+                    <td scope="col">{{statistika.fauly}}</td>
+                    <td scope="col">{{statistika.body}}</td>
+                {% endif %}
+            {% endfor %}
+            {% if  zapsano == 0  %}
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+                <td scope="col"></td>
+            {% endif %}
+
+
+
         </tr>
 {% endfor %}
     </tbody>

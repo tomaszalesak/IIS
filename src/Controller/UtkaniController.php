@@ -2,9 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\StatistikyHrace;
 use App\Entity\Turnaj;
 use App\Entity\Utkani;
+use App\Entity\Uzivatel;
+use App\Form\StatistikyHraceFormType;
 use App\Form\UtkaniFormType;
+use App\Repository\StatistikyHraceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -70,7 +74,7 @@ class UtkaniController extends AbstractController
 
 
     /**
-     * @Route("/utkani/statistiky/{id}", name="app_ statistiky_utkani")
+     * @Route("/utkani/statistiky/{id}", name="app_statistiky_utkani")
      * @IsGranted("ROLE_USER")
      */
     public function statistiky_utkani($id,Request $request, EntityManagerInterface $em)
@@ -117,6 +121,38 @@ class UtkaniController extends AbstractController
 
         return $this->render('utkani/statistiky.html.twig', [
             'utkaniForm' => $form->createView(),
+            'utkani' => $utkani
+        ]);
+    }
+
+    /**
+     * @Route("/utkani/statistiky_hrace/{id_hrace}/{id_utkani}", name="app_statistiky_hrace_utkani")
+     * @IsGranted("ROLE_USER")
+     */
+    public function statistiky_hrace($id_utkani, $id_hrace,Request $request, EntityManagerInterface $em)
+    {
+        $utkani = $em->getRepository(Utkani::class)->find($id_utkani);
+        $hrac =  $em->getRepository(Uzivatel::class)->find($id_hrace);
+
+        $statistiky = $em->getRepository(StatistikyHrace::class)->findOneBy(['utkani'=>$utkani, 'hrac' =>$hrac]);
+        if($statistiky == NULL)
+            $statistiky = new StatistikyHrace();
+
+        $form = $this->createForm(StatistikyHraceFormType::class, $statistiky);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $statistiky->setHrac($hrac);
+            $statistiky->setUtkani($utkani);
+            $em->persist($statistiky);
+            $em->flush();
+            $this->addFlash('success', 'Statistika byla hraci zapsana');
+            return $this->redirectToRoute('app_statistiky_utkani', ['id' => $id_utkani]);
+        }
+
+        return $this->render('utkani/statistiky_hrace.html.twig', [
+            'statForm' => $form->createView(),
+            'hrac' => $hrac,
             'utkani' => $utkani
         ]);
     }

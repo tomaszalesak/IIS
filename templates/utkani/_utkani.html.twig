@@ -21,7 +21,7 @@
                 <td scope="row">{{ utk.hostebody? utk.hostebody : '-'}}</td>
                 <th>{{ utk.hoste? utk.hoste.jmeno : '-'}}</th>
                 {% if is_granted('ROLE_USER') and app.user in turnaj.rozhodci  %}
-                    <td scope="row"><a class="btn btn-secondary" href="{{ path('app_ statistiky_utkani',{id: utk.id}) }}" role="submit">Zapsat statistiky</a></td>
+                    <td scope="row"><a class="btn btn-secondary" href="{{ path('app_statistiky_utkani',{id: utk.id}) }}" role="submit">Zapsat statistiky</a></td>
                 {% endif %}
             </tr>
         {% endif %}
