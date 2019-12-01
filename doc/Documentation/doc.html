@@ -2,7 +2,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=iso-8859-2"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <title>Projekt IIS</title>
     <style type="text/css">
     	table { border-collapse: collapse; }
@@ -12,46 +12,48 @@
 </head>
 <body>
 
-<!-- Zkontrolujte prosím nastavení kódování v hlavičce dokumentu 
-     podle použitého editoru -->
+<!-- Zkontrolujte prosĂ­m nastavenĂ­ kĂłdovĂĄnĂ­ v hlavi?ce dokumentu 
+     podle pouĹžitĂŠho editoru -->
 
-<h1>Sport: správa turnajů, registrace hráčů a zadávání výsledků</h1> <!-- Nahradte názvem svého zadání -->
+<h1>Sport: sprĂĄva turnajĹŻ, registrace hrĂĄÄĹŻ a zadĂĄvĂĄnĂ­ vĂ˝sledkĹŻ</h1>
 
 
 <dl>
-	<dt>Autoři</dt>
-	<dd>Tomáš Zálešák 
+	<dt>AutoĹi</dt>
+	<dd>TomĂĄĹĄ ZĂĄleĹĄĂĄk 
 	    <a href="mailto:xzales13@stud.fit.vutbr.cz">xzales13@stud.fit.vutbr.cz</a> -
-		popis činnosti v týmu
+		popis ?innosti v tĂ˝mu
 	</dd>
-	<dd>Jan Sladký
+	<dd>Jan SladkĂ˝
 	    <a href="mailto:xsladk09@stud.fit.vutbr.cz">xsladk09@stud.fit.vutbr.cz</a> - 
-		popis činnosti v týmu
+		popis ?innosti v tĂ˝mu
+
 	</dd>
-  <dd>David Ševčík
+  <dd>David Ĺ evÄĂ­k
 	    <a href="mailto:xsevci62@stud.fit.vutbr.cz">xsevci62@stud.fit.vutbr.cz</a> - 
-		popis činnosti v týmu
+		popis ?innosti v tĂ˝mu
+
 	</dd>
 	<dt>URL aplikace</dt>
 	<dd><a href="http://www.stud.fit.vutbr.cz/~xzales13/IIS/public/index.php">http://www.stud.fit.vutbr.cz/~xzales13/IIS/public/index.php</a></dd>
-	<dd>(pokud má aplikace více vstupních stránek, napište obdobně další URL)</dd>
+	<dd>(pokud mĂĄ aplikace vĂ­ce vstupnĂ­ch strĂĄnek, napiĹĄte obdobn? dalĹĄĂ­ URL)</dd>
 </dl>
 
-<h2>Uživatelé systému pro testování</h2>
-<p>Uveďte prosím existující zástupce <strong>všech rolí uživatelů</strong>.</p>
+<h2>UĹživatelĂŠ systĂŠmu pro testovĂĄnĂ­</h2>
+<p>UveÄte prosĂ­m existujĂ­cĂ­ zĂĄstupce <strong>vĹĄech rolĂ­ uĹživatelĹŻ</strong>.</p>
 <table>
 <tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
-<tr><td>admin</td><td>admin</td><td>Administrátor</td></tr>
-<tr><td>rozhodci</td><td>heslo01</td><td>Rozhodčí</td></tr>
-<tr><td>pepa</td><td>heslo01</td><td>Hráč</td></tr>
+<tr><td>admin</td><td>heslo01</td><td>AdministrĂĄtor</td></tr>
+<tr><td>rozhodci</td><td>heslo01</td><td>RozhodÄĂ­</td></tr>
+<tr><td>pepa</td><td>heslo01</td><td>HrĂĄÄ</td></tr>
 </table>
 
-<p>(Diagram případů užití není nutné vkládat, pokud IS implementuje role a případy užití definované zadáním.)</p> 
+<p>(Diagram pĹĂ­padĹŻ uĹžitĂ­ nenĂ­ nutnĂŠ vklĂĄdat, pokud IS implementuje role a pĹĂ­pady uĹžitĂ­ definovanĂŠ zadĂĄnĂ­m.)</p> 
 
 <h2>Implementace</h2>
-<p>Stručná dokumentace k implementaci, která popisuje, které části projektu (např. PHP skripty) implementují jednotlivé případy použití.</p>
+<p>StruÄnĂĄ dokumentace k implementaci, kterĂĄ popisuje, kterĂŠ ÄĂĄsti projektu (napĹ. PHP skripty) implementujĂ­ jednotlivĂŠ pĹĂ­pady pouĹžitĂ­.</p>
 
-<h3>Databáze</h3>
+<h3>DatabĂĄze</h3>
 
 
 <svg viewBox="69 -4 1205 708" width="1136px" height="712px" xmlns="http://www.w3.org/2000/svg" version="1.1">
@@ -231,14 +233,14 @@
 
 <h2>Instalace</h2>
 
-Stručně popište: 
+Struďż˝nďż˝ popiďż˝te: 
 <ul>
 <li>postup instalace na server,</li>
-<li>softwarové požadavky (verze PHP apod.),</li>
-<li>jak rozbalit, konfigurovat, inicializovat databázi, ...</li>
+<li>softwarovďż˝ poďż˝adavky (verze PHP apod.),</li>
+<li>jak rozbalit, konfigurovat, inicializovat databďż˝zi, ...</li>
 </ul>
 
-<h3 id="postupnasazennaevu">Postup nasazení na server eva.fit.vutbr.cz</h3>
+<h3 id="postupnasazennaevu">Postup nasazenĂ­ na server eva.fit.vutbr.cz</h3>
 
 <pre><code>ssh eva
 cd ~/WWW
@@ -250,21 +252,21 @@ php72 -r "unlink('composer-setup.php');"
 php72 composer.phar install
 </code></pre>
 
-<p> <b>  V .env je potřeba zvolit databázi na evě. </b></p>
+<p> <b>  V .env je potĹeba zvolit databĂĄzi na evÄ. </b></p>
 
 <pre><code>php72 bin/console doctrine:migrations:migrate
 chmod -R 755 ~/WWW/.*
 </code></pre>
 
-<h3>Softwarové požadavky</h3>
+<h3>Softwarovďż˝ poďż˝adavky</h3>
 <ul>
 	<li>php 7.2</li>
 	<li>MySQL</li>
 	<li>Composer</li>
 </ul>
 
-<h2>Známé problémy</h2>
-<p>Zde popište, které body zadání nejsou implementovány a z jakého důvodu. Např. &bdquo;Z časových důvodů nebyla implementována správa uživatelů.&rdquo; Pomůžete tím zrychlit hodnocení, když neimplementované funkce nebudeme muset dlouze hledat.</p>
+<h2>Znďż˝mďż˝ problďż˝my</h2>
+<p>Zde popiďż˝te, kterďż˝ body zadďż˝nďż˝ nejsou implementovďż˝ny a z jakďż˝ho dďż˝vodu. Napďż˝. &bdquo;Z ďż˝asovďż˝ch dďż˝vodďż˝ nebyla implementovďż˝na sprďż˝va uďż˝ivatelďż˝.&rdquo; Pomďż˝ďż˝ete tďż˝m zrychlit hodnocenďż˝, kdyďż˝ neimplementovanďż˝ funkce nebudeme muset dlouze hledat.</p>
 
 </body>
 </html>

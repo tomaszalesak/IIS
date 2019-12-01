@@ -49,13 +49,26 @@ class AppFixtures extends Fixture
         $manager->persist($typ);
         $manager->flush();
 
+        $admin = new Uzivatel();
+        $admin->setUsername("admin");
+        $admin->setJmeno("Jan");
+        $admin->setPrijmeni("Jelínek");
+        $admin->setPassword($this->encoder->encodePassword($admin, 'heslo01'));
+        $admin->setDatumNarozeni(new \DateTime("1990-05-01"));
+        $roles = array("ROLE_USER", "ROLE_ADMIN");
+        $admin->setRoles($roles);
+
+        $manager->persist($admin);
+        $manager->flush();
+
+
         // Uzivatele
         $uzivatel1 = new Uzivatel();
         $uzivatel1->setUsername("uzivatel");
         $uzivatel1->setJmeno("Jan");
         $uzivatel1->setPrijmeni("Novák");
         $uzivatel1->setPassword($this->encoder->encodePassword($uzivatel1, 'heslo01'));
-        $uzivatel1->setDatumNarozeni(new \DateTime());
+        $uzivatel1->setDatumNarozeni(new \DateTime("1995-09-10"));
 
         $manager->persist($uzivatel1);
         $manager->flush();
@@ -671,97 +684,7 @@ class AppFixtures extends Fixture
 
         $manager->persist($bitesB);
         $manager->flush();
-
-
-        //TURNAJE
-        $turnaj = new Turnaj();
-        $turnaj->setNazev("Turnaj na Rude");
-        $turnaj->setAdresa("Hospoda u Malců, Ruda 1");
-        $turnaj->setPopis("Dojdite si zahrat basket na rudu.");
-        $turnaj->setVedouci($uzivatel);
-        $turnaj->setTyp($typ1);
-        $turnaj->setDatum(new \DateTime());
-        $turnaj->setpocetTymu(4);
-
-        $turnaj->addTymy($tym);
-        $turnaj->addTymy($tym1);
-
-        $manager->persist($turnaj);
-        $manager->flush();
-
-
-        $turnaj = new Turnaj();
-        $turnaj->setNazev("Memorial Františka Palackého");
-        $turnaj->setAdresa("U stadionu 4, Polná");
-        $turnaj->setPopis("Zveme vás na 12. ročník již tradiční ho turneje v Basketballu, který se uskuteční 1.4.2020 v Polné na hřišti. Jedná se o Vyřazovací  soutěž pro 8 tříčlenných týmů. Startovné pro každý tým je 200 Kč a zahrnuje poukaz na Steak a Pivo-Limo pro každého člena týmu.");
-        $turnaj->setVedouci($uzivatel);
-        $turnaj->setTyp($typ3);
-        $turnaj->setDatum(new \DateTime("2020-04-01"));
-
-        $turnaj->setpocetTymu(4);
-
-        $turnaj->addTymy($jablonov);
-        $turnaj->addTymy($hermanice);
-
-        $manager->persist($turnaj);
-        $manager->flush();
-
-        $turnaj = new Turnaj();
-        $turnaj->setNazev("3v3 na Rudě");
-        $turnaj->setAdresa("Malé hřiště, Ruda");
-        $turnaj->setPopis("Zveme vás na první ročník Basketbalového turnaje pro tří až pětičlenné týmy !! který se uskuteční 1.9.2019 v Rudě u Velkého Meziříčí. Zahájení se koná ve 14 hodin na malém hřišti. Herní systém 3v3. K poslechu a tanci zahraje skupina Galáni.");
-        $turnaj->setVedouci($uzivatel);
-        $turnaj->setTyp($typ3);
-        $turnaj->setDatum(new \DateTime("2019-09-01"));
-        $turnaj->setpocetTymu(4);
-
-        $turnaj->addTymy($bitesB);
-        //TODO: pridat tymy
-        $manager->persist($turnaj);
-        $manager->flush();
-
-        $turnaj = new Turnaj();
-        $turnaj->setNazev("Děravý koš");
-        $turnaj->setAdresa("Sportovní Hala, Osová Bitýška");
-        $turnaj->setPopis("Zveme vás na turnaj děravý koš pro jednotlivce, který se uskuteční 1. 6. 2019 v rámci sportovního dne v Osové Bitýšce. Registrace proběhne ve 13. hodin ve sportovní hale Základní Školy.");
-        $turnaj->setVedouci($uzivatel);
-        $turnaj->setTyp($typ1);
-        $turnaj->addRozhodci($slavek);
-        $turnaj->addRozhodci($rozhodci);
-        $turnaj->setDatum(new \DateTime("2019-06-01"));
-        $turnaj->setpocetTymu(4);
-
-        for ($x = 0; $x < 4; $x++) {
-            $turnaj->addTymy($userTeams[$x]);
-        }
-
-        $manager->persist($turnaj);
-        $manager->flush();
-
-        //5v5
-        $turnaj = new Turnaj();
-        $turnaj->setNazev("Turnaj o město Tišnov");
-        $turnaj->setAdresa("Tišnov, Sokolovna");
-        $turnaj->setPopis("Zveme vas na Turnaj o město Tišnov, který se uskuteční 1. 12. 2019 v Tišnovské sokolovně. Slavnostní zahájení je v 15.00. K poslechu a tanci zahraje skupina Accort. Připravena zábava i pro celou rodinu.");
-        $turnaj->setVedouci($slavek);
-        $turnaj->setTyp($typ3);
-        $turnaj->setDatum(new \DateTime("2020-10-23"));
-        $turnaj->setpocetTymu(4);
-        //TODO: pridat tymy
-        $manager->persist($turnaj);
-        $manager->flush();
-
-        $turnaj = new Turnaj();
-        $turnaj->setNazev("Slivovica Cup");
-        $turnaj->setAdresa("Jabloňov, hřiště");
-        $turnaj->setPopis("Zveme Vás na tradiční Slivovica cup, který se uskuteční 13.3.2019 na hřišti v obci Jabloňov. Jedná se o turnaj pro 4 týmy systémem 5v5, přičemž vítěz obdrží 1 litr kvalitní slivovice z místní pěstitelské pálenice.");
-        $turnaj->setVedouci($uzivatel);
-        $turnaj->setTyp($typ5);
-        $turnaj->setDatum(new \DateTime("2020-03-22"));
-        $turnaj->setpocetTymu(4);
-        //TODO: pridat tymy
-        $manager->persist($turnaj);
-        $manager->flush();
+       
 
         //plne turnaje - test        
 
@@ -904,23 +827,6 @@ class AppFixtures extends Fixture
 
 
 
-        $turnaj = new Turnaj();
-        $turnaj->setNazev("Memoriál T. G. Masaryka");
-        $turnaj->setAdresa("Napajedla, sokolovna");
-        $turnaj->setPopis("Zveme vás na turnaj v basketballu pro tří až pětičlenné týmy, který se uskuteční 1. 6. 2019 v Sokolovně v Napajedlech");
-        $turnaj->setVedouci($slavek);
-        $turnaj->setTyp($typ3);
-        $turnaj->addRozhodci($slavek);
-        $turnaj->addRozhodci($rozhodci);
-        $turnaj->setDatum(new \DateTime("2019-06-01"));
-        $turnaj->setpocetTymu(8);
-
-        for ($x = 0; $x < 8; $x++) {
-            $turnaj->addTymy($Turnaj1Tymy[$x]);
-        }
-
-        $manager->persist($turnaj);
-        $manager->flush();
         
 
 
@@ -1076,19 +982,138 @@ class AppFixtures extends Fixture
 
 
 
+
+
+
+        //Turnaje
+
+         //5v5
+         $turnaj = new Turnaj();
+         $turnaj->setNazev("Turnaj o město Tišnov");
+         $turnaj->setAdresa("Tišnov, Sokolovna");
+         $turnaj->setPopis("Zveme vas na Turnaj o město Tišnov, který se uskuteční 23. 10. 2020 v Tišnovské sokolovně. Slavnostní zahájení je v 15.00. K poslechu a tanci zahraje skupina Accort. Připravena zábava i pro celou rodinu.");
+         $turnaj->setVedouci($slavek);
+         $turnaj->setTyp($typ3);
+         $turnaj->setDatum(new \DateTime("2020-10-23"));
+         $turnaj->setpocetTymu(4);
+         //TODO: pridat tymy
+         $manager->persist($turnaj);
+         $manager->flush();
+ 
+         $turnaj = new Turnaj();
+         $turnaj->setNazev("Slivovica Cup");
+         $turnaj->setAdresa("Jabloňov, hřiště");
+         $turnaj->setPopis("Zveme Vás na tradiční Slivovica cup, který se uskuteční 22. 6. 2020 na hřišti v obci Jabloňov. Jedná se o turnaj pro 4 týmy systémem 5v5, přičemž vítěz obdrží 1 litr kvalitní slivovice z místní pěstitelské pálenice.");
+         $turnaj->setVedouci($uzivatel);
+         $turnaj->setTyp($typ5);
+         $turnaj->setDatum(new \DateTime("2020-06-22"));
+         $turnaj->setpocetTymu(4);
+         //TODO: pridat tymy
+         $manager->persist($turnaj);
+         $manager->flush();
+
+
+
+
+                 //TURNAJE
         $turnaj = new Turnaj();
-        $turnaj->setNazev("Jmeno Turnaje");
+        $turnaj->setNazev("Turnaj na Rude");
+        $turnaj->setAdresa("Hospoda u Malců, Ruda 1");
+        $turnaj->setPopis("Dojdite si zahrat basket na rudu.");
+        $turnaj->setVedouci($uzivatel);
+        $turnaj->setTyp($typ1);
+        $turnaj->setDatum(new \DateTime("2020-04-12"));
+        $turnaj->setpocetTymu(4);
+
+        $turnaj->addTymy($tym);
+        $turnaj->addTymy($tym1);
+
+        $manager->persist($turnaj);
+        $manager->flush();
+
+
+        $turnaj = new Turnaj();
+        $turnaj->setNazev("Memorial Františka Palackého");
+        $turnaj->setAdresa("U stadionu 4, Polná");
+        $turnaj->setPopis("Zveme vás na 12. ročník již tradiční ho turneje v Basketballu, který se uskuteční 1.4.2020 v Polné na hřišti. Jedná se o Vyřazovací  soutěž pro 8 tříčlenných týmů. Startovné pro každý tým je 200 Kč a zahrnuje poukaz na Steak a Pivo-Limo pro každého člena týmu.");
+        $turnaj->setVedouci($uzivatel);
+        $turnaj->setTyp($typ3);
+        $turnaj->setDatum(new \DateTime("2020-04-01"));
+
+        $turnaj->setpocetTymu(4);
+
+        $turnaj->addTymy($jablonov);
+        $turnaj->addTymy($hermanice);
+
+        $manager->persist($turnaj);
+        $manager->flush();
+
+        $turnaj = new Turnaj();
+        $turnaj->setNazev("3v3 na Rudě");
+        $turnaj->setAdresa("Malé hřiště, Ruda");
+        $turnaj->setPopis("Zveme vás na první ročník Basketbalového turnaje pro tří až pětičlenné týmy !! který se uskuteční 21. 3. 2020 v Rudě u Velkého Meziříčí. Zahájení se koná ve 14 hodin na malém hřišti. Herní systém 3v3. K poslechu a tanci zahraje skupina Galáni.");
+        $turnaj->setVedouci($uzivatel);
+        $turnaj->setTyp($typ3);
+        $turnaj->setDatum(new \DateTime("2020-03-21"));
+        $turnaj->setpocetTymu(4);
+
+        $turnaj->addTymy($bitesB);
+        //TODO: pridat tymy
+        $manager->persist($turnaj);
+        $manager->flush();
+        
+        
+        $turnaj = new Turnaj();
+        $turnaj->setNazev("Napajedla 2019");
         $turnaj->setAdresa("Napajedla, sokolovna");
-        $turnaj->setPopis("popis turnaje");
+        $turnaj->setPopis("");
         $turnaj->setVedouci($slavek);
         $turnaj->setTyp($typ3);
         $turnaj->addRozhodci($slavek);
         $turnaj->addRozhodci($rozhodci);
-        $turnaj->setDatum(new \DateTime("2019-05-11"));
+        $turnaj->setDatum(new \DateTime("2019-12-02"));
         $turnaj->setpocetTymu(16);
 
         for ($x = 0; $x < 16; $x++) {
             $turnaj->addTymy($Turnaj1Tymy[$x]);
+        }
+
+        $manager->persist($turnaj);
+        $manager->flush();
+
+         
+        $turnaj = new Turnaj();
+        $turnaj->setNazev("Memoriál T. G. Masaryka");
+        $turnaj->setAdresa("Napajedla, sokolovna");
+        $turnaj->setPopis("Zveme vás na turnaj v basketballu pro tří až pětičlenné týmy, který se uskuteční 1. 6. 2019 v Sokolovně v Napajedlech");
+        $turnaj->setVedouci($slavek);
+        $turnaj->setTyp($typ3);
+        $turnaj->addRozhodci($slavek);
+        $turnaj->addRozhodci($rozhodci);
+        $turnaj->setDatum(new \DateTime("2019-06-01"));
+        $turnaj->setpocetTymu(8);
+
+        for ($x = 0; $x < 8; $x++) {
+            $turnaj->addTymy($Turnaj1Tymy[$x]);
+        }
+
+        $manager->persist($turnaj);
+        $manager->flush();
+
+
+        $turnaj = new Turnaj();
+        $turnaj->setNazev("Děravý koš");
+        $turnaj->setAdresa("Sportovní Hala, Osová Bitýška");
+        $turnaj->setPopis("Zveme vás na turnaj děravý koš pro jednotlivce, který se uskuteční 1. 3. 2019 v rámci sportovního dne v Osové Bitýšce. Registrace proběhne ve 13. hodin ve sportovní hale Základní Školy.");
+        $turnaj->setVedouci($uzivatel);
+        $turnaj->setTyp($typ1);
+        $turnaj->addRozhodci($slavek);
+        $turnaj->addRozhodci($rozhodci);
+        $turnaj->setDatum(new \DateTime("2019-03-01"));
+        $turnaj->setpocetTymu(4);
+
+        for ($x = 0; $x < 4; $x++) {
+            $turnaj->addTymy($userTeams[$x]);
         }
 
         $manager->persist($turnaj);
