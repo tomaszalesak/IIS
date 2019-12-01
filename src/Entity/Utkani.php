@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -59,6 +61,16 @@ class Utkani
      * @Assert\NotBlank(message="Vyplňte prosím toto pole")
      */
     private $hoste_body;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\StatistikyHrace", mappedBy="utkani")
+     */
+    private $statistikyHracu;
+
+    public function __construct()
+    {
+        $this->statistikyHracu = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -157,6 +169,37 @@ class Utkani
     public function setHosteBody(?int $hoste_body): self
     {
         $this->hoste_body = $hoste_body;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|StatistikyHrace[]
+     */
+    public function getStatistikyHracu(): Collection
+    {
+        return $this->statistikyHracu;
+    }
+
+    public function addStatistikyHracu(StatistikyHrace $statistikyHracu): self
+    {
+        if (!$this->statistikyHracu->contains($statistikyHracu)) {
+            $this->statistikyHracu[] = $statistikyHracu;
+            $statistikyHracu->setUtkani($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStatistikyHracu(StatistikyHrace $statistikyHracu): self
+    {
+        if ($this->statistikyHracu->contains($statistikyHracu)) {
+            $this->statistikyHracu->removeElement($statistikyHracu);
+            // set the owning side to null (unless already changed)
+            if ($statistikyHracu->getUtkani() === $this) {
+                $statistikyHracu->setUtkani(null);
+            }
+        }
 
         return $this;
     }

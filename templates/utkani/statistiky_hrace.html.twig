@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <h4>Statistiky hrace {{ hrac.jmeno }} {{ hrac.prijmeni }}  na utkání {{ utkani.domaci.jmeno }} vs {{ utkani.hoste.jmeno }} </h4>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col">
+                {{ form_start(statForm) }}
+
+                {{ form_row(statForm.dva_body ) }}
+                {{ form_row(statForm.tri_body) }}
+                {{ form_row(statForm.fauly) }}
+                {{ form_row(statForm.body) }}
+                <button class="btn btn-primary">Zapsat statistiky </button>
+
+                {{ form_end(statForm) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
