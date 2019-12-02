@@ -1,4 +1,4 @@
-<table class="table table-hover">
+<table class="table .table-sm">
     <thead>
     <tr>
         <th scope="col">Název</th>
@@ -11,7 +11,7 @@
     {% for turnaj in turnaje %}
         <tr>
             <th scope="row">{{ turnaj.nazev }}</th>
-            <td>{{ turnaj.datum|date("d.m.Y") }}</td>
+            <td>{{ turnaj.datum|date("d. m. Y") }}</td>
             <td>{{ turnaj.adresa }}</td>
             <td><a class="btn btn-primary btn-sm" href="{{ path("app_turnaj", {nazev: turnaj.nazev}) }}" role="button">Detail</a></td>
         </tr>
