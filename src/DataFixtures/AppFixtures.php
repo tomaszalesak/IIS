@@ -45,7 +45,7 @@ class AppFixtures extends Fixture
         $typ = new Typ();
         $typ->setNazev("1x1");
         $typ->setPocetClenuTymu(1);
-        $typ->setMinPocetClenu(5);
+        $typ->setMinPocetClenu(1);
 
         $typ1 = $typ;
 
