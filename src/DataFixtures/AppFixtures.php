@@ -29,6 +29,7 @@ class AppFixtures extends Fixture
         $typ3 = new Typ();
         $typ3->setNazev("3x3");
         $typ3->setPocetClenuTymu(5);
+        $typ3->setMinPocetClenu(3);
 
         $manager->persist($typ3);
         $manager->flush();
@@ -36,6 +37,7 @@ class AppFixtures extends Fixture
         $typ5 = new Typ();
         $typ5->setNazev("5x5");
         $typ5->setPocetClenuTymu(12);
+        $typ5->setMinPocetClenu(5);
 
         $manager->persist($typ5);
         $manager->flush();
@@ -43,6 +45,7 @@ class AppFixtures extends Fixture
         $typ = new Typ();
         $typ->setNazev("1x1");
         $typ->setPocetClenuTymu(1);
+        $typ->setMinPocetClenu(5);
 
         $typ1 = $typ;
 
