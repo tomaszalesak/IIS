@@ -1,82 +1,90 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Správa turnajů{% endblock %}</title>
-        {% block stylesheets %}
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-        {% endblock %}
-    </head>
-    <body>
-            <nav class="navbar navbar-expand-lg navbar-dark  bg-dark">
-                <a class="navbar-brand" href="{{ path('app_main') }}">IIS</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+<html lang="cs-cz">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Správa turnajů{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+              integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ"
+              crossorigin="anonymous">
+    {% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark  bg-dark">
+    <a class="navbar-brand" href="{{ path('app_main') }}"><i class="fas fa-basketball-ball fa-2x" style="color: indianred;"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_turnaje') }}">Turnaje</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_tymy') }}">Týmy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('app_hraci') }}">Hráči</a>
-                        </li>
-                        <!-- User -->
-                        {% if is_granted('ROLE_USER') %}
-                            <a class="nav-link" > | </a>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                                    {{ app.user.jmeno }} {{ app.user.prijmeni }}
-                                </a>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ path('app_user_turnaje')}}">Moje turnaje</a>
-                                    <a class="dropdown-item" href="{{ path('app_user_novy_turnaj')}}">Založit turnaj</a>
-                                    <a class="dropdown-item" href="{{ path('app_user_tymy')}}">Moje týmy</a>
-                                    <a class="dropdown-item" href="{{ path('app_user_novy_tym')}}">Založit tým</a>
-                                    <a class="dropdown-item" href="#">Moje statistiky</a>
-                                    <a class="dropdown-item" href="#">Přihlásit se jako rozhodčí</a>
-                                </div>
-                            </li>
-                        {% endif %}
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                    </form>
-                    {% if is_granted('ROLE_USER') %}
-                        <a class="nav-link" href="{{ path('app_logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a>
-                    {% else %}
-                        <a class="nav-link" href="{{ path('app_login') }}"><i class="fas fa-sign-in-alt"></i> Sign In</a>
-                        <a class="nav-link" href="{{ path('app_register') }}"><i class="fas fa-user-plus"></i> Register</a>
-                    {% endif %}
-                </div>
-            </nav>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_turnaje') }}?page=1">Turnaje</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_tymy') }}?page=1">Týmy</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_hraci') }}?page=1">Hráči</a>
+            </li>
+            <!-- User -->
+            {% if is_granted('ROLE_USER') %}
+                <a class="nav-link"> | </a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                        {{ app.user.jmeno }} {{ app.user.prijmeni }}
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ path('app_user_turnaje') }}">Moje turnaje</a>
+                        <a class="dropdown-item" href="{{ path('app_user_novy_turnaj') }}">Založit turnaj</a>
+                        <a class="dropdown-item" href="{{ path('app_user_tymy') }}">Moje týmy</a>
+                        <a class="dropdown-item" href="{{ path('app_user_novy_tym') }}">Založit tým</a>
+                        <a class="dropdown-item" href="#">Moje statistiky</a>
+                        <a class="dropdown-item" href="#">Přihlásit se jako rozhodčí</a>
+                    </div>
+                </li>
+            {% endif %}
+        </ul>
+        <ul class="navbar-nav">
+            {% if is_granted('ROLE_USER') %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_logout') }}">Odhlásit se</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_login') }}">Přihlášení</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_register') }}">Registrace</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
 
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>
-                <br>
-            {% endfor %}
+{% for message in app.flashes('success') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    <br>
+{% endfor %}
 
-            {% for message in app.flashes('err') %}
-                <div class="alert alert-danger">
-                    {{ message }}
-                </div>
-                <br>
-            {% endfor %}
+{% for message in app.flashes('err') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+    <br>
+{% endfor %}
+
 <br>
-                {% block body %}{% endblock %}
-        {% block javascripts %}
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        {% endblock %}
-    </body>
+
+{% block body %}{% endblock %}
+{% block javascripts %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+{% endblock %}
+</body>
 </html>

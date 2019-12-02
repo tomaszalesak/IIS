@@ -1,16 +1,16 @@
-<table class="table table-hover">
+<table class="table">
     <thead>
     <tr>
         <th scope="col">Název</th>
         <th scope="col">Typ</th>
         <th scope="col">Vedoucí</th>
-        <th scope="col">Detail</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
     {% for tym in tymy %}
         <tr>
-            <td>{{ tym.jmeno }}</td>
+            <th>{{ tym.jmeno }}</th>
             <td>{{ tym.typ.nazev }}</td>
             <td>{{ tym.vedouci.jmeno }} {{ tym.vedouci.prijmeni }}</td>
             <td><a class="btn btn-primary btn-sm" href="{{ path("app_tym", {nazev: tym.jmeno}) }}" role="button">Detail</a></td>

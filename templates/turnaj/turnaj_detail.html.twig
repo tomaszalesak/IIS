@@ -7,11 +7,16 @@
 
 {% block body %}
     <div class="container">
+        <div>
+            <h2>{{ turnaj.nazev }}</h2>
+        </div>
+        <div class="row">
+            <div class="col">
+                {{ turnaj.popis }}
+            </div>
+        </div>
         {% if (is_granted('ROLE_USER') and turnaj.vedouci == app.user) or is_granted('ROLE_ADMIN') %}
             <div class="d-flex justify-content-between">
-                <div>
-                    <h2>{{ turnaj.nazev }}</h2>
-                </div>
                 <div>
                     <a class="btn btn-secondary" href="{{ path('app_user_zmena_turnaj', {nazev: turnaj.nazev}) }}" role="submit"> <i class="fas fa-edit"></i>  Upravit</a>
                     <button class="btn btn-danger my-2 my-sm-0" type="button" data-toggle="modal" data-target="#Modal1"> <i class="fas fa-trash-alt"></i>  Odstranit</button>
@@ -37,35 +42,34 @@
                     </div>
                 </div>
             </div>
-        {% else %}
-            <h2>{{ turnaj.nazev }}</h2>
         {% endif %}
             <br >
 
-            <table class="table table-striped">
+            <table class="table">
                 <tbody>
                 <tr>
                     <th><b> Datum </b></th>
                     <th>{{ turnaj.datum|date("d.m.Y") }}</th>
+                </tr>
+                <tr>
                     <th><b> Místo </b></th>
                     <th>{{ turnaj.adresa }}</th>
                 </tr>
                 <tr>
                     <th><b> Typ </b></th>
                     <th>{{ turnaj.typ.nazev }}</th>
+                </tr>
+                <tr>
                     <th><b> Volné místo (týmy) </b></th>
                     <th>{{ turnaj.pocettymu - turnaj.tymy|length }} / {{turnaj.pocettymu}}</th>
                 </tr>
 
                 {% if is_granted('ROLE_USER') %}
                     <tr>
-                        <th>Přihlásit tým do turnaje</th>
-                        <th></th>
-                        <th></th>
                         {% if turnaj.pocettymu == turnaj.tymy|length %}
-                            <th><button class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#Modal2" disabled>Přihlásit</button></th>
+                            <th><button class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#Modal2" disabled>Přihlásit tým do turnaje</button></th>
                         {% else %}
-                            <th><button class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#Modal2">Přihlásit</button></th>
+                            <th><button class="btn btn-success my-2 my-sm-0" type="button" data-toggle="modal" data-target="#Modal2">Přihlásit tým do turnaje</button></th>
                         {% endif %}
                         <!-- Modal -->
                         <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -97,65 +101,34 @@
                             </div>
                         </div>
 
-
-                    </tr>
-                    <tr>
-                        <th>Přihlásit se jako rozhodčí</th>
-                        <th></th>
-                        <th></th>
                         {% if turnaj.rozhodci|length == 2  or app.user in turnaj.rozhodci %}
-                            <th><a class="btn btn-outline-success disabled" href="{{ path('app_user_prihlasit_rozhodci_turnaj',{turnaj_id: turnaj.id }) }}" role="button">Přihlásit</a></th>
+                            <th><a class="btn btn-success my-2 my-sm-0 disabled" href="{{ path('app_user_prihlasit_rozhodci_turnaj',{turnaj_id: turnaj.id }) }}" role="button">Přihlásit se jako rozhodčí</a></th>
                         {% else %}
-                            <th><a class="btn btn-outline-success" href="{{ path('app_user_prihlasit_rozhodci_turnaj',{turnaj_id: turnaj.id }) }}" role="button">Přihlásit</a></th>
+                            <th><a class="btn btn-success my-2 my-sm-0" href="{{ path('app_user_prihlasit_rozhodci_turnaj',{turnaj_id: turnaj.id }) }}" role="button">Přihlásit se jako rozhodčí</a></th>
                         {% endif %}
                     </tr>
 
                 {% endif %}
                 <tr>
-                    <th><b> Rozhodčí 1 </b></th>
-                    <th><b> Rozhodčí 2 </b></th>
-                </tr>
-                <tr>
+                    <th><b> Rozhodčí:</b></th>
                     {% for rozhodci in turnaj.rozhodci %}
-                        <th><b> {{ rozhodci.jmeno }} {{ rozhodci.prijmeni }}  </b></th>
+                        <th> {{ rozhodci.jmeno }} {{ rozhodci.prijmeni }}  </th>
                     {% endfor %}
                 </tr>
                 </tbody>
             </table>
-
-
-
-
-            <div class="row">
-                <div class="col">
-                    <h3> Popis</h3>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    {{ turnaj.popis }}
-                </div>
-            </div>
 
         <div class="row">
             <div class="col">
                 <h3> Týmy zapsané na turnaj</h3>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <table class="table table-striped">
-                    <tbody>
-                    <tr>
-                        {% for tym in turnaj.tymy %}
-                            <th> <a href="{{ path('app_tym', {nazev: tym.jmeno}) }}"> {{ tym.jmeno }} </a></th>
-                        {% endfor %}
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="list-group">
+            {% for tym in turnaj.tymy %}
+                <a href="{{ path('app_tym', {nazev: tym.jmeno}) }}" class="list-group-item list-group-item-action"> {{ tym.jmeno }} </a>
+            {% endfor %}
         </div>
-
+        <br>
         <!-- Zapasy --------------->
         <div class="row">
             <div class="col">
