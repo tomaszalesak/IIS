@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,6 +52,18 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $form['imageFile']->getData();
+            if ($uploadedFile)
+            {
+                $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
+                $uploadedFile->move(
+                    $destination,
+                    uniqid() . '-' . $uploadedFile->getClientOriginalName()
+                );
+                $tym->setImage(uniqid() . '-' . $uploadedFile->getClientOriginalName());
+            }
+
             $tym->addUzivatele($this->getUser());
             $tym->setVedouci($this->getUser());
 
@@ -77,6 +90,17 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $form['imageFile']->getData();
+            if ($uploadedFile)
+            {
+                $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
+                $uploadedFile->move(
+                    $destination,
+                    uniqid() . '-' . $uploadedFile->getClientOriginalName()
+                );
+                $tym->setImage(uniqid() . '-' . $uploadedFile->getClientOriginalName());
+            }
             $em->persist($tym);
             $em->flush();
             $this->addFlash('success', 'Tým byl změněn');

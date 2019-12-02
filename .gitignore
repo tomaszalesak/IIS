@@ -20,3 +20,5 @@
 
 #phpStorm folder
 .idea/
+
+/public/uploads/

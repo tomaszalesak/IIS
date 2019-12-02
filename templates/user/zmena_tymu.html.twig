@@ -12,11 +12,29 @@
                 {{ form_row(tymForm.popis ) }}
                 {{ form_row(tymForm.adresa ) }}
                 {{ form_row(tymForm.typ) }}
+                {{ form_row(tymForm.imageFile, {
+                    attr: {
+                        'placeholder': 'Vyber logo týmu'
+                    }
+                })}}
                 <button class="btn btn-primary">Upravit tým </button>
 
                 {{ form_end(tymForm) }}
             </div>
         </div>
     </div>
+
+{% endblock %}
+
+
+{% block javascripts %}
+    <script>
+        $('.custom-file-input').on('change', function(event) {
+            var inputFile = event.currentTarget;
+            $(inputFile).parent()
+                .find('.custom-file-label')
+                .html(inputFile.files[0].name);
+        });
+    </script>
 
 {% endblock %}

@@ -6,6 +6,7 @@ use App\Entity\Tym;
 use App\Entity\Typ;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,7 +30,11 @@ class TymFormType extends AbstractType
                 'label' => 'Typ *',
                 'placeholder' => 'Vyber typ týmu'
             ])
-
+            ->add('imageFile', FileType::class, [
+                'label' => 'Logo týmu',
+                'mapped' => false,
+                'required' => false
+            ])
         ;
     }
 

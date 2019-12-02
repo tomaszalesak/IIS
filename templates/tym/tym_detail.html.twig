@@ -2,6 +2,11 @@
 
 {% block body %}
     <div class="container">
+    <div class="row">
+        <div class="col">
+            <img src="{{ asset }}public/uploads/{{ tym.image }}" class="rounded float-left">
+        </div>
+    </div>
     {% if (is_granted('ROLE_USER') and tym.vedouci == app.user) or is_granted('ROLE_ADMIN') %}
         <div class="d-flex justify-content-between">
             <div>
