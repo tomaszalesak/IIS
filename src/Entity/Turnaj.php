@@ -57,7 +57,7 @@ class Turnaj
     private $typ;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Uzivatel")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Uzivatel", inversedBy="vedouci_turnaje")
      * @ORM\JoinColumn(nullable=false)
      */
     private $vedouci;
