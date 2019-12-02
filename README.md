@@ -247,3 +247,16 @@ V .env zvol databázi na evě.
 php72 bin/console doctrine:migrations:migrate
 chmod -R 755 ~/WWW/.*
 ```
+
+composer install
+php72 bin/console doctrine:migrations:migrate
+php72 bin/console doctrine:fixtures:load
+ja jeste trochu jinak
+php bin/console doctrine:database:drop --force
+vymaze databazi
+php bin/console doctrine:database:create
+to ji vytvori
+ja jsem v phpmyadmin napsal do sql console drop databaze iis a pres gui vytvoril novou 😀
+a pak normal
+php bin/console doctrine:migrations:migrate
+
