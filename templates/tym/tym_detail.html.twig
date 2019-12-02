@@ -4,7 +4,7 @@
     <div class="container">
     <div class="row">
         <div class="col">
-            <img src="{{ asset }}public/uploads/{{ tym.image }}" class="rounded float-left">
+            <img src="/uploads/{{ tym.image }}" class="img-resposive" height="200" width="200"  alt="sdf">
         </div>
     </div>
     {% if (is_granted('ROLE_USER') and tym.vedouci == app.user) or is_granted('ROLE_ADMIN') %}

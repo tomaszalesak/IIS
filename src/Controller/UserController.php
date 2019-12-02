@@ -56,12 +56,13 @@ class UserController extends AbstractController
             $uploadedFile = $form['imageFile']->getData();
             if ($uploadedFile)
             {
+                $nazev = uniqid() . '-' . $uploadedFile->getClientOriginalName();
                 $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
                 $uploadedFile->move(
                     $destination,
-                    uniqid() . '-' . $uploadedFile->getClientOriginalName()
+                    $nazev
                 );
-                $tym->setImage(uniqid() . '-' . $uploadedFile->getClientOriginalName());
+                $tym->setImage($nazev);
             }
 
             $tym->addUzivatele($this->getUser());
@@ -92,14 +93,16 @@ class UserController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $uploadedFile */
             $uploadedFile = $form['imageFile']->getData();
+
             if ($uploadedFile)
             {
+                $nazev = uniqid() . '-' . $uploadedFile->getClientOriginalName();
                 $destination = $this->getParameter('kernel.project_dir') . '/public/uploads';
                 $uploadedFile->move(
                     $destination,
-                    uniqid() . '-' . $uploadedFile->getClientOriginalName()
+                    $nazev
                 );
-                $tym->setImage(uniqid() . '-' . $uploadedFile->getClientOriginalName());
+                $tym->setImage($nazev);
             }
             $em->persist($tym);
             $em->flush();
