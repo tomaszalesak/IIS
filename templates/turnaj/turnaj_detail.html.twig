@@ -78,11 +78,17 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                            {% for tym in app.user.tymy %}
-                                                {% if tym.typ == turnaj.typ and tym.vedouci == app.user and  tym not in turnaj.tymy  %}
-                                                    <a  href="{{ path('app_user_prihlasit_tym_turnaj', {turnaj_id: turnaj.id, tym_id: tym.id }) }}">{{ tym.jmeno }}</a><br>
-                                                {% endif %}
-                                            {% endfor %}
+                                        {% set ma_tym = 0 %}
+                                        {% for tym in app.user.tymy %}
+                                            {% if tym.typ == turnaj.typ and tym.vedouci == app.user and  tym not in turnaj.tymy  %}
+                                                {% set ma_tym = 1 %}
+                                                <a  href="{{ path('app_user_prihlasit_tym_turnaj', {turnaj_id: turnaj.id, tym_id: tym.id }) }}">{{ tym.jmeno }}</a><br>
+                                            {% endif %}
+                                        {% endfor %}
+                                        {% if ma_tym == 0 %}
+                                            <h4>Nemáte žádný tým který by jste mohl přihlásit</h4>
+                                        {% endif %}
+
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavřít</button>

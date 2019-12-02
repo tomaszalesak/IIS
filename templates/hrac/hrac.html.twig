@@ -4,7 +4,14 @@
     <div class="container">
         <div class="row">
             <div class="col">
-                <h3>{{ hrac.jmeno }} {{ hrac.prijmeni }}</h3>
+                <div class="float-left">
+                    <h3> {{ hrac.jmeno }} {{ hrac.prijmeni }}</h3>
+                </div>
+                {% if is_granted('ROLE_USER') and app.user == hrac %}
+                    <div class="float-right">
+                        <a class="btn btn-secondary" href="{{ path('app_user_zmena_hrac', {id: hrac.id}) }}" role="submit"> <i class="fas fa-edit"></i> Upravit</a>
+                    </div>
+                {% endif %}
             </div>
         </div>
         <div class="row">
