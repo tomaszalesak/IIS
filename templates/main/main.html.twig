@@ -2,4 +2,29 @@
 
 
 {% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                {%  if turnaje|length == 0  %}
+                <h4>Zatím žádném turnaje</h4>
+                {% else %}
+                <h4>Nadcházející turnaje</h4>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col">
+                {{ include('main/_current_turnaje.html.twig') }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col">
+                <div class="d-flex justify-content-center">
+                    {% set page = turnaje.getTotalItemCount %}
+                    {{ include('_pagination.html.twig') }}
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

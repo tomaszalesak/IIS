@@ -15,6 +15,7 @@
                 {{ turnaj.popis }}
             </div>
         </div>
+        <br>
         {% if (is_granted('ROLE_USER') and turnaj.vedouci == app.user) or is_granted('ROLE_ADMIN') %}
             <div class="d-flex justify-content-between">
                 <div>
