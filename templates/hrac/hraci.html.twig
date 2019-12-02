@@ -3,20 +3,21 @@
 {% block body %}
     <div class="container">
         <div class="row">
-            {%  if turnaje|length == 0  %}
-                <h4>Zatím žádném turnaje</h4>
+            {%  if hraci|length == 0  %}
+                <h4>Nejsou žádní hráči</h4>
             {% else %}
-                <h4>Seznam turnajů</h4>
-                {{ include('turnaj/_turnaje.html.twig') }}
+                <h4>Seznam hráčů</h4>
+                {{ include('hrac/_hraci.html.twig') }}
             {% endif %}
         </div>
         <div class="row ">
             <div class="col">
                 <div class="d-flex justify-content-center">
-                    {% set page = turnaje.getTotalItemCount %}
+                    {% set page = hraci.getTotalItemCount %}
                     {{ include('_pagination.html.twig') }}
                 </div>
             </div>
         </div>
+
     </div>
 {% endblock %}

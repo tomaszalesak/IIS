@@ -1,0 +1,14 @@
+{% if page >=15 %}
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            {% if page is divisible by(15) %}
+                {% set pages = page/15 %}
+            {% else %}
+                {% set pages = page/15 +1 %}
+            {% endif %}
+            {% for pag in 1..pages %}
+            <li class="page-item"><a class="page-link" href="?page={{ pag }}">{{ pag }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+{% endif %}

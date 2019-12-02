@@ -1,7 +1,6 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th scope="col">#</th>
         <th scope="col">Název</th>
         <th scope="col">Typ</th>
         <th scope="col">Vedoucí</th>
@@ -9,11 +8,8 @@
     </tr>
     </thead>
     <tbody>
-    {%  set i = 0 %}
     {% for tym in tymy %}
-        {% set i = i + 1 %}
         <tr>
-            <th scope="row">{{ i }}</th>
             <td>{{ tym.jmeno }}</td>
             <td>{{ tym.typ.nazev }}</td>
             <td>{{ tym.vedouci.jmeno }} {{ tym.vedouci.prijmeni }}</td>

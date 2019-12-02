@@ -1,0 +1,18 @@
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Jméno</th>
+        <th scope="col">Věk</th>
+        <th scope="col">Detail</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for hrac in hraci %}
+        <tr>
+            <th scope="row">{{ hrac.jmeno}} {{ hrac.prijmeni}}</th>
+            <td>{{ "now"|date("Y") - hrac.datumnarozeni|date("Y")  }}</td>
+            <td><a class="btn btn-primary btn-sm" href="{{ path("app_hrac", {id:hrac.id}) }}" role="button">Detail</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

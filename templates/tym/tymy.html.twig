@@ -10,6 +10,14 @@
         {{ include('tym/_tymy.html.twig') }}
         {% endif %}
     </div>
+    <div class="row ">
+        <div class="col">
+            <div class="d-flex justify-content-center">
+                {% set page = tymy.getTotalItemCount %}
+                {{ include('_pagination.html.twig') }}
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

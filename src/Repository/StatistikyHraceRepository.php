@@ -19,6 +19,29 @@ class StatistikyHraceRepository extends ServiceEntityRepository
         parent::__construct($registry, StatistikyHrace::class);
     }
 
+    public function soucetStatistik($hrac)
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.hrac = :hrac')
+            ->setParameter('hrac', $hrac)
+            ->select('SUM(s.dva_body) as dva_body, SUM(s.tri_body) as tri_body, SUM(s.fauly) as fauly, SUM(s.body) as body ')
+            ->getQuery()
+            ->getOneOrNullResult()
+            ;
+    }
+
+    public function prumerStatistik($hrac)
+    {
+    return $this->createQueryBuilder('s')
+        ->andWhere('s.hrac = :hrac')
+        ->setParameter('hrac', $hrac)
+        ->select('AVG(s.dva_body) as dva_body, AVG(s.tri_body) as tri_body, AVG(s.fauly) as fauly, AVG(s.body) as body ')
+        ->getQuery()
+        ->getOneOrNullResult()
+        ;
+    }
+
+
     // /**
     //  * @return StatistikyHrace[] Returns an array of StatistikyHrace objects
     //  */

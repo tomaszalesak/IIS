@@ -25,7 +25,7 @@
                             <a class="nav-link" href="{{ path('app_tymy') }}">Týmy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Hráči</a>
+                            <a class="nav-link" href="{{ path('app_hraci') }}">Hráči</a>
                         </li>
                         <!-- User -->
                         {% if is_granted('ROLE_USER') %}

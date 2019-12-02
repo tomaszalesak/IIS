@@ -7,6 +7,7 @@ use App\Entity\Tym;
 use App\Entity\Uzivatel;
 use App\Form\TurnajFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,13 +19,19 @@ class TurnajController extends AbstractController
     /**
      * @Route("/turnaje", name="app_turnaje")
      */
-    public function index(EntityManagerInterface $em)
+    public function index(EntityManagerInterface $em, Request $request, PaginatorInterface $paginator)
     {
         $turnajRepository = $em->getRepository(Turnaj::class);
         $turnaje = $turnajRepository->findAll();
 
+        $pagination = $paginator->paginate(
+            $turnaje, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            10/*limit per page*/
+        );
+
         return $this->render('turnaj/turnaje.html.twig', [
-            'turnaje' => $turnaje
+            'turnaje' => $pagination
         ]);
     }
 

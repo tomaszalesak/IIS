@@ -1,0 +1,94 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h3>{{ hrac.jmeno }} {{ hrac.prijmeni }}</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h6> Datum narození: {{ hrac.datumnarozeni|date("d.m.Y")}}</h6>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <h5>Člen týmů:</h5>
+                {% set tymy = hrac.tymy %}
+                {%  if tymy|length == 0  %}
+                    <h6>Není členem žádného týmu</h6>
+                {% else %}
+                    {{ include('tym/_tymy.html.twig') }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h5>Nejbližší turnaje:</h5>
+                {% set turnaje = budouci_turnaje %}
+                {%  if turnaje|length == 0  %}
+                    <h6>Nezúčastni se žádného budoucího turnaje</h6>
+                {% else %}
+                    {{ include('turnaj/_turnaje.html.twig') }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h5>Uplynulé turnaje:</h5>
+                {% set turnaje = uplynule_turnaje %}
+                {%  if turnaje|length == 0  %}
+                    <h6>Nezúčastnil se žádného turnaje</h6>
+                {% else %}
+                    {{ include('turnaj/_turnaje.html.twig') }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <h5>Statistiky:</h5>
+                <h6>Součet statistik na zápas:</h6>
+                <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">2B</th>
+                        <th scope="col">3B</th>
+                        <th scope="col">Fauly</th>
+                        <th scope="col">B</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <td scope="col">{{ statistiky_soucet.dva_body? statistiky_soucet.dva_body : '0'}}</td>
+                    <td scope="col">{{statistiky_soucet.tri_body? statistiky_soucet.tri_body : '0'}}</td>
+                    <td scope="col">{{statistiky_soucet.fauly? statistiky_soucet.fauly : '0'}}</td>
+                    <td scope="col">{{statistiky_soucet.body? statistiky_soucet.body : '0'}}</td>
+                    </tbody>
+                </table>
+
+
+                <h6>Průměr statistik na zápas:</h6>
+                <table class="table table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">2B</th>
+                        <th scope="col">3B</th>
+                        <th scope="col">Fauly</th>
+                        <th scope="col">B</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <td scope="col">{{ statistiky_prumer.dva_body|number_format(2)}}</td>
+                    <td scope="col">{{statistiky_prumer.tri_body|number_format(2)}}</td>
+                    <td scope="col">{{statistiky_prumer.fauly|number_format(2)}}</td>
+                    <td scope="col">{{statistiky_prumer.body|number_format(2)}}</td>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
