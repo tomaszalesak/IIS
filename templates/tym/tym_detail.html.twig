@@ -81,7 +81,7 @@
             <tbody>
             <tr>
                 {% for uzivatel in tym.uzivatele %}
-                    <th> <a href=""> {{ uzivatel.jmeno }} {{ uzivatel.prijmeni }} </a></th>
+                    <th> <a href="{{ path('app_hrac', {id: uzivatel.id}) }}"> {{ uzivatel.jmeno }} {{ uzivatel.prijmeni }} </a></th>
                 {% endfor %}
             </tr>
             </tbody>
