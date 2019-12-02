@@ -26,8 +26,8 @@ class UserController extends AbstractController
      */
     public function index()
     {
-        return $this->render('main/main.html.twig', [
-        ]);
+
+        return $this->redirectToRoute('app_hrac',['id' => $this->getUser()->getId()]);
     }
 
     /**

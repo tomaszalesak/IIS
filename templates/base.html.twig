@@ -37,12 +37,11 @@
                         {{ app.user.jmeno }} {{ app.user.prijmeni }}
                     </a>
                     <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ path('app_hrac',{id: app.user.id}) }}">Můj profil</a>
                         <a class="dropdown-item" href="{{ path('app_user_turnaje') }}">Moje turnaje</a>
                         <a class="dropdown-item" href="{{ path('app_user_novy_turnaj') }}">Založit turnaj</a>
                         <a class="dropdown-item" href="{{ path('app_user_tymy') }}">Moje týmy</a>
                         <a class="dropdown-item" href="{{ path('app_user_novy_tym') }}">Založit tým</a>
-                        <a class="dropdown-item" href="#">Moje statistiky</a>
-                        <a class="dropdown-item" href="#">Přihlásit se jako rozhodčí</a>
                     </div>
                 </li>
             {% endif %}
