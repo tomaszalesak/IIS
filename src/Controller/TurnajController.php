@@ -21,8 +21,7 @@ class TurnajController extends AbstractController
      */
     public function index(EntityManagerInterface $em, Request $request, PaginatorInterface $paginator)
     {
-        $turnajRepository = $em->getRepository(Turnaj::class);
-        $turnaje = $turnajRepository->findAll();
+        $turnaje = $em->getRepository(Turnaj::class)->findAll();
 
         $pagination = $paginator->paginate(
             $turnaje, /* query NOT result */
@@ -143,13 +142,16 @@ class TurnajController extends AbstractController
         $tymy_turnaje = $turnaj->getTymy();
         $err = 0;
 
+        if ($tym->getUzivatele()->count() < $turnaj->getTyp()->getMinPocetClenu())
+            $err = 1;
+
         foreach ($tymy_turnaje as $tym_t)
         {
             $clenove_tymu_turnaje = $tym_t->getUzivatele();
             foreach ($clenove_tymu_turnaje as $clen)
             {
                 if($tym->getUzivatele()->contains($clen)) {
-                    $err = 1;
+                    $err = 2;
                     break;
                 }
             }
@@ -158,15 +160,17 @@ class TurnajController extends AbstractController
         foreach($rozhodci as $roz )
         {
             if($tym->getUzivatele()->contains($roz)) {
-                $err = 2;
+                $err = 3;
                 break;
             }
         }
 
         $err_text = 'Nelze přidat tento tým';
-            if ($err == 1)
-                $err_text = 'Nelze přidat tento tým, protože nějaký člen týmu je členem už přihlášeného týmu';
+        if ($err == 1)
+            $err_text = 'Nelze přidat tento tým, tým neobsahuje minimalní počet hráčů';
         else if ($err == 2)
+            $err_text = 'Nelze přidat tento tým, protože nějaký člen týmu je členem už přihlášeného týmu';
+        else if ($err == 3)
             $err_text = 'Nelze přidat tento tým, protože nějaký člen týmu je rozhodčí tohoto turnaje';
 
         if(($turnaj->getTyp() == $tym->getTyp()) and $this->getUser() == $tym->getVedouci() and $err == 0){

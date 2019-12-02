@@ -75,6 +75,7 @@ class Tym
     private $vyherni_utkani;
 
 
+
     public function __construct()
     {
         $this->uzivatele = new ArrayCollection();
@@ -82,6 +83,7 @@ class Tym
         $this->utkani_hoste = new ArrayCollection();
         $this->utkani_domaci = new ArrayCollection();
         $this->vyherni_utkani = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -295,6 +297,7 @@ class Tym
 
         return $this;
     }
+
 
 
 }

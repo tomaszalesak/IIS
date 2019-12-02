@@ -7,7 +7,7 @@
 
 {% block body %}
     <div class="container">
-        {% if is_granted('ROLE_USER') and turnaj.vedouci == app.user %}
+        {% if (is_granted('ROLE_USER') and turnaj.vedouci == app.user) or is_granted('ROLE_ADMIN') %}
             <div class="d-flex justify-content-between">
                 <div>
                     <h2>{{ turnaj.nazev }}</h2>
@@ -80,7 +80,7 @@
                                     <div class="modal-body">
                                         {% set ma_tym = 0 %}
                                         {% for tym in app.user.tymy %}
-                                            {% if tym.typ == turnaj.typ and tym.vedouci == app.user and  tym not in turnaj.tymy  %}
+                                            {% if tym.typ == turnaj.typ and tym.vedouci == app.user and  tym not in turnaj.tymy %}
                                                 {% set ma_tym = 1 %}
                                                 <a  href="{{ path('app_user_prihlasit_tym_turnaj', {turnaj_id: turnaj.id, tym_id: tym.id }) }}">{{ tym.jmeno }}</a><br>
                                             {% endif %}
@@ -124,6 +124,8 @@
             </table>
 
 
+
+
             <div class="row">
                 <div class="col">
                     <h3> Popis</h3>
@@ -160,13 +162,15 @@
                 <div class="float-left">
                     <h3> Zápasy</h3>
                 </div>
-                {% if app.user == turnaj.vedouci or app.user in turnaj.rozhodci %}
+                {% if app.user == turnaj.vedouci or is_granted('ROLE_ADMIN') %}
                     <div class="float-right">
-                        {% if turnaj.tymy|length == turnaj.pocettymu and turnaj.utkani|length == 0 %}
-                            <a class="btn btn-secondary" href="{{ path('app_ generovani_utkani', {id_turnaj: turnaj.id}) }}" role="submit">Generovat utkání</a>
-                        {% else %}
-                            <a class="btn btn-secondary disabled" href="{{ path('app_ generovani_utkani', {id_turnaj: turnaj.id}) }}" role="submit">Generovat utkání</a>
-                        {%  endif %}
+                        {% if turnaj.utkani|length == 0 %}
+                            {% if turnaj.tymy|length == turnaj.pocettymu %}
+                                <a class="btn btn-secondary" href="{{ path('app_ generovani_utkani', {id_turnaj: turnaj.id}) }}" role="submit">Generovat utkání</a>
+                            {% else %}
+                                <a class="btn btn-secondary disabled" href="{{ path('app_ generovani_utkani', {id_turnaj: turnaj.id}) }}" role="submit">Generovat utkání</a>
+                            {%  endif %}
+                        {% endif %}
                     </div>
                 {% endif %}
             </div>

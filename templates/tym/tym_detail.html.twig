@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="container">
-    {% if is_granted('ROLE_USER') and tym.vedouci == app.user %}
+    {% if (is_granted('ROLE_USER') and tym.vedouci == app.user) or is_granted('ROLE_ADMIN') %}
         <div class="d-flex justify-content-between">
             <div>
                 <h2>{{ tym.jmeno }}</h2>

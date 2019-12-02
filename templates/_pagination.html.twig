@@ -7,7 +7,7 @@
                 {% set pages = page/15 +1 %}
             {% endif %}
             {% for pag in 1..pages %}
-            <li class="page-item"><a class="page-link" href="?page={{ pag }}">{{ pag }}</a></li>
+                <li class="page-item {{ pag == app.request.get('page')? 'active' : '' }}"><a class="page-link" href="?page={{ pag }}">{{ pag }}</a></li>
             {% endfor %}
         </ul>
     </nav>
