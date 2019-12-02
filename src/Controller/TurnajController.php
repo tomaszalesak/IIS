@@ -140,17 +140,33 @@ class TurnajController extends AbstractController
         $turnaj = $em->getRepository(Turnaj::class)->find($turnaj_id);
         $tym = $em->getRepository(Tym::class)->find($tym_id);
         $rozhodci = $turnaj->getRozhodci();
+        $tymy_turnaje = $turnaj->getTymy();
         $err = 0;
 
-        foreach($rozhodci as $roz ){
+        foreach ($tymy_turnaje as $tym_t)
+        {
+            $clenove_tymu_turnaje = $tym_t->getUzivatele();
+            foreach ($clenove_tymu_turnaje as $clen)
+            {
+                if($tym->getUzivatele()->contains($clen)) {
+                    $err = 1;
+                    break;
+                }
+            }
+        }
+
+        foreach($rozhodci as $roz )
+        {
             if($tym->getUzivatele()->contains($roz)) {
-                $err = 1;
+                $err = 2;
                 break;
             }
         }
 
         $err_text = 'Nelze přidat tento tým';
-        if ($err == 1)
+            if ($err == 1)
+                $err_text = 'Nelze přidat tento tým, protože nějaký člen týmu je členem už přihlášeného týmu';
+        else if ($err == 2)
             $err_text = 'Nelze přidat tento tým, protože nějaký člen týmu je rozhodčí tohoto turnaje';
 
         if(($turnaj->getTyp() == $tym->getTyp()) and $this->getUser() == $tym->getVedouci() and $err == 0){

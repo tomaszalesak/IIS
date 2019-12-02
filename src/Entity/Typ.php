@@ -38,6 +38,11 @@ class Typ
      */
     private $turnaje;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $min_pocet_clenu;
+
     public function __construct()
     {
         $this->tymy = new ArrayCollection();
@@ -131,6 +136,18 @@ class Typ
                 $turnaje->setTyp(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMinPocetClenu(): ?int
+    {
+        return $this->min_pocet_clenu;
+    }
+
+    public function setMinPocetClenu(int $min_pocet_clenu): self
+    {
+        $this->min_pocet_clenu = $min_pocet_clenu;
 
         return $this;
     }

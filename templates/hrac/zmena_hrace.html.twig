@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col">
+                <h1>Upravit profil</h1>
+
+                {{ form_start(uzivatelForm) }}
+
+                {{ form_row(uzivatelForm.username) }}
+                {{ form_row(uzivatelForm.jmeno) }}
+                {{ form_row(uzivatelForm.prijmeni) }}
+                {{ form_row(uzivatelForm.datum_narozeni) }}
+                <button  class="btn btn-primary">Změnit </button>
+
+                {{ form_end(uzivatelForm) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
