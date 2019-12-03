@@ -47,7 +47,6 @@ class HracController extends AbstractController
             foreach ($tym->getTurnaje() as $turnaj)
             {
                 if ($turnaj->getDatum() >= new \DateTime("now"))
-                if ($turnaj->getDatum() >= new \DateTime("now"))
                     $budouci_turnaje[] = $turnaj;
                 else
                     $uplynule_turnaje[] = $turnaj;
