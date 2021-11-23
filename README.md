@@ -1,5 +1,7 @@
 # IIS
 
+Školní projekt z ISA, VUT FIT Brno.
+
 IIS: Sport: správa turnajů, registrace hráčů a zadávání výsledků
 
 <table cellpadding="2" style="max-width: 700px"><tbody><tr><td><b>Společná část popisu:</b></td></tr>
